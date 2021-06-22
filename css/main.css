@@ -1311,7 +1311,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5cffff;
+  background: #4f63ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2874,7 +2874,7 @@ code {
 }
 .table-container::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background: #00af91;
+  background: #808080;
 }
 .table-container::-webkit-scrollbar-track {
   background: none;
@@ -2883,7 +2883,6 @@ code {
   opacity: 0.95;
 }
 .header-inner {
-  margin-top: 18px;
   opacity: 0.95;
 }
 .popup {
