@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heavytiger.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":18,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="导语：git是什么 git是用于Linux内核开发的版本控制工具。与CVS、Subversion一类的集中式版本控制工具不同，它采用了分布式版本库的作法，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便。git的速度很快，这对于诸如Linux内核这样的大项目来说自然很重要。git最为出色的是它的合并追踪（merge tracing）能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git使用的基本技巧">
+<meta property="og:url" content="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
+<meta property="og:description" content="导语：git是什么 git是用于Linux内核开发的版本控制工具。与CVS、Subversion一类的集中式版本控制工具不同，它采用了分布式版本库的作法，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便。git的速度很快，这对于诸如Linux内核这样的大项目来说自然很重要。git最为出色的是它的合并追踪（merge tracing）能力。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/git_config.png">
+<meta property="article:published_time" content="2021-06-14T08:29:07.000Z">
+<meta property="article:modified_time" content="2021-06-15T08:29:07.000Z">
+<meta property="article:author" content="喵式重战">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="代码版本管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/git_config.png">
+
+<link rel="canonical" href="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git使用的基本技巧 | HeavyTiger's Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+   <!--动态线条背景-->
+    <script type="text/javascript"color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+   
+   <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HeavyTiger's Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">逆水行舟</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/HeavyTiger" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="喵式重战">
+      <meta itemprop="description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HeavyTiger's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git使用的基本技巧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-14 16:29:07" itemprop="dateCreated datePublished" datetime="2021-06-14T16:29:07+08:00">2021-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-15 16:29:07" itemprop="dateModified" datetime="2021-06-15T16:29:07+08:00">2021-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!--此处为希望博客在首页显示的内容-->
+
+<h2 id="导语：git是什么"><a href="#导语：git是什么" class="headerlink" title="导语：git是什么"></a>导语：git是什么</h2><blockquote>
+<p>git是用于Linux内核开发的版本控制工具。与CVS、Subversion一类的集中式版本控制工具不同，它采用了分布式版本库的作法，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便。git的速度很快，这对于诸如Linux内核这样的大项目来说自然很重要。git最为出色的是它的合并追踪（merge tracing）能力。</p>
+</blockquote>
+<span id="more"></span>
+<!-- markdownlint-disable MD041 MD002-->
+
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><h3 id="下载git并直接安装"><a href="#下载git并直接安装" class="headerlink" title="下载git并直接安装"></a>下载git并直接安装</h3><p>在Windows上可以直接在官网下载<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">Git安装程序</a>，下载完成后，直接按照步骤进行安装即可，记得选中Add to Path以将其bin目录添加进系统环境中，方便使用。安装完成后，右键选中git bash here，开启bash。</p>
+<h3 id="配置全局参数"><a href="#配置全局参数" class="headerlink" title="配置全局参数"></a>配置全局参数</h3><p>在bash下输入以下代码，全局配置参数，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.name <span class="string">&quot;Your Name&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">&quot;email@example.com&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>输入<code>git config --global --list</code>命令可以显示设置过的全局变量，如下图所示：<br><img src="git_config.png" alt="git config --global --list显示的结果"></p>
+<h2 id="git的目录结构"><a href="#git的目录结构" class="headerlink" title="git的目录结构"></a>git的目录结构</h2><p>git中加入了暂存区的概念，分为工作区，版本库中的暂存区，分支等概念。</p>
+<h3 id="工作区（）"><a href="#工作区（）" class="headerlink" title="工作区（）"></a>工作区（）</h3><h2 id="git的基础使用"><a href="#git的基础使用" class="headerlink" title="git的基础使用"></a>git的基础使用</h2><h3 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h3><p>git仓库即repository，在其中的所有文件均可以被git进行管理，对于文件的新建，修改，删除，git均可以对其进行记录，在进行记录之后，任何事件都可以对历史版本进行追踪、还原等操作。</p>
+<p>创建git仓库的方法非常简单，首先将跳转到合适的路径下，创建一个文件夹（也可以是已经包含文件的文件夹），在bash下可以使用如下代码创建一个git仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /e/ProgramDemo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir Learn_git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/e/ProgramDemo/Learn_git</span><br><span class="line"><span class="meta">$</span><span class="bash"> git init</span></span><br></pre></td></tr></table></figure>
+
+<p>在输入完成后可以发现路径下出现了一个以.git命名的隐藏文件夹，说明仓库创建成功。</p>
+<h3 id="将文件添加到版本库"><a href="#将文件添加到版本库" class="headerlink" title="将文件添加到版本库"></a>将文件添加到版本库</h3><p>在使用<code>git init</code>对git仓库进行建立后，即可在该路径下进行相关项目的创建与书写。</p>
+<p>git可以对这些文件进行跟踪，告知每次文件的修改情况（注意：只能跟踪文本文件，可以监测到添加删除的内容。但对二进制文件无法进行跟踪，只能检测到文件大小发生了变化，因此word文档无法进行跟踪，因为其是二进制文件）在进行文本编辑时，建议使用utf8编码，减少冲突的可能。</p>
+<p>下面对如何将git中的文件添加到仓库进行演示：</p>
+<p>首先在仓库路径下右键选择git bash here打开bash。使用touch命令新建一个测试文件test1.txt，向文件中随意写入一些内容，并进行保存。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch test1.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vim test1.txt         <span class="comment"># 随意写入一些内容</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test1.txt</span></span><br><span class="line">Hello world!</span><br><span class="line">This is HeavyTiger!</span><br></pre></td></tr></table></figure>
+
+<p>写入内容后，可以使用git对文件进行管理了。首先使用命令<code>git status</code>可以看到，git已经检测到我们在路径中创建了新文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Untracked files:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line">        test1.txt</span><br></pre></td></tr></table></figure>
+
+<p>使用git add命令对文件进行添加，建文件添加到仓库。如果想添加所有的文件，只需要使用<code>git add .</code>命令，即可添加所有文件，如果有不想追踪的文件格式，例如.class文件，可以创建 .gitignore文件对匹配到的相关后缀文件进行忽视。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add test1.txt</span><br><span class="line">git status</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)</span><br><span class="line">        new file:   test1.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看修改的内容"><a href="#查看修改的内容" class="headerlink" title="查看修改的内容"></a>查看修改的内容</h3><p>对test1.txt的文件内容进行修改，修改后，可以使用<code>git diff test1.txt</code>命令查看对文件的修改情况。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim test1.txt     <span class="comment">#对文本文件进行编辑，做出修改</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat test1.txt</span></span><br><span class="line">This is HeavyTiger! how are you?</span><br><span class="line">This is a new line which I insert on the second day!</span><br><span class="line"><span class="meta">$</span><span class="bash"> git diff test1.txt</span></span><br><span class="line">diff --git a/test1.txt b/test1.txt</span><br><span class="line">index 02e6d3d..6eac541 100644</span><br><span class="line">--- a/test1.txt</span><br><span class="line">+++ b/test1.txt</span><br><span class="line">@@ -1,2 +1,2 @@</span><br><span class="line">-Hello world!</span><br><span class="line">-This is HeavyTiger!</span><br><span class="line">+This is HeavyTiger! how are you?</span><br><span class="line">+This is a new line which I insert on the second day!</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，文件已经被修改，<code>git diff</code>命令详细给出了行的改变情况。在查询到修改的内容没有问题后，即可放心地将文件进行add与commit操作。（建议在add与commit之前使用<code>git status</code>命令了解代码是否经过了修改，若发现存在修改，可以使用<code>git diff</code>命令查看修改的详细位置）。</p>
+<h3 id="暂存区修改提交至本地仓库"><a href="#暂存区修改提交至本地仓库" class="headerlink" title="暂存区修改提交至本地仓库"></a>暂存区修改提交至本地仓库</h3><p><code>git commit</code>命令可以将暂存区中的修改提交至<strong>本地</strong>的版本库。使用<code>git commit</code>命令会在本地的版本库中生成一个40位的哈希值（原因是多人对项目进行commit时，若使用常规的编码如0、1、2等，会导致产生冲突），称为commit-id，在进行版本回退（<code>git reset</code>）时，需要通过该值进行回退。</p>
+<p>通常会使用命令<code>git commit -m &quot;message&quot;</code>进行版本提交，在添加了-m参数后，可以输入提交信息，在message中需要简洁地对此次提交进行描述，方便查看版本信息。若提交的message过长，想进行更加清楚的描述，可以使用以下方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &#x27;</span><br><span class="line">message1</span><br><span class="line">message2</span><br><span class="line">&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>此外，若已经提交了一个版本至服务器中（即已进行<code>git commit</code>和<code>git push</code>操作，未被<code>git merge</code>），但是发现版本中出现了小bug，不想再重新提交一个新的版本，可以使用<code>git commit --amend</code>命令进行追加提交提交至前一次版本的commit-id。</p>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>可以对已经使用<code>git commit</code>命令的本地版本进行回退。需要使用<code>git reset</code>命令进行回退，在向前回退时，可以使用<code>git log</code>命令查看commit-id，通过该id进行版本的回退与更改。查看得到的结果如下所示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br><span class="line">commit a52f403b886f5168b00ad1c91897cf808d26a990 (HEAD -&gt; master)</span><br><span class="line">Author: HeavyTiger &lt;462857080@qq.com&gt;</span><br><span class="line">Date:   Mon Jun 14 16:23:43 2021 +0800</span><br><span class="line"></span><br><span class="line">    The second commitment</span><br><span class="line"></span><br><span class="line">commit 4369702618f9fe107a9e2629446ce4e1d4b2a6a8</span><br><span class="line">Author: HeavyTiger &lt;462857080@qq.com&gt;</span><br><span class="line">Date:   Mon Jun 14 16:19:26 2021 +0800</span><br><span class="line"></span><br><span class="line">    The first commitment</span><br><span class="line"></span><br><span class="line">commit dcd812278c90f6c66a622ae2e6202054d1740f80 (origin/master, origin/HEAD)</span><br><span class="line">Author: HeavyTiger &lt;462857080@qq.com&gt;</span><br><span class="line">Date:   Mon Jun 14 16:10:24 2021 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br></pre></td></tr></table></figure>
+
+<p>通过commit-id可以进行版本的回退。使用<code>git reset --hard ID</code>，例如：<code>git reset --hard dcd812</code>回退到Initial commit版本，也可以通过<strong>HEAD</strong>参数进行版本回退，HEAD参数表示当前的版本，在右上角附带^表示上一个版本，故<code>git reset --hard HEAD^</code>表示回退到上一个版本，<code>git reset --hard HEAD^^</code>表示回退到前两个版本。如果回退到前100个版本，也可以使用如下的方法进行回退<code>git reset --hard HEAD~100</code></p>
+<p>但是在进行版本回退之后将无法看到新版本的commit-id，如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD^</span></span><br><span class="line">HEAD is now at 4369702 The first commitment</span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br><span class="line">commit 4369702618f9fe107a9e2629446ce4e1d4b2a6a8 (HEAD -&gt; master)</span><br><span class="line">Author: HeavyTiger &lt;462857080@qq.com&gt;</span><br><span class="line">Date:   Mon Jun 14 16:19:26 2021 +0800</span><br><span class="line"></span><br><span class="line">    The first commitment</span><br><span class="line"></span><br><span class="line">commit dcd812278c90f6c66a622ae2e6202054d1740f80 (origin/master, origin/HEAD)</span><br><span class="line">Author: HeavyTiger &lt;462857080@qq.com&gt;</span><br><span class="line">Date:   Mon Jun 14 16:10:24 2021 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以此时如何找到最新的版本号呢？可以使用<code>git reflog</code>命令查看commit记录，在reflog中记录了commit-id，因此可以很方便地向后进行跳转，找到最新commit的代码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reflog</span></span><br><span class="line">4369702 (HEAD -&gt; master) HEAD@&#123;0&#125;: reset: moving to HEAD^</span><br><span class="line">a52f403 HEAD@&#123;1&#125;: reset: moving to a52f</span><br><span class="line">4369702 (HEAD -&gt; master) HEAD@&#123;2&#125;: reset: moving to 4369</span><br><span class="line">a52f403 HEAD@&#123;3&#125;: commit: The second commitment</span><br><span class="line">4369702 (HEAD -&gt; master) HEAD@&#123;4&#125;: commit: The first commitment</span><br><span class="line">dcd8122 (origin/master, origin/HEAD) HEAD@&#123;5&#125;: clone: from github.com:HeavyTiger/Learn_git.git</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>谢谢你请我喝肥宅快乐水(๑＞ڡ＜) ☆☆☆</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatimg.jpg" alt="喵式重战 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipayimg.jpg" alt="喵式重战 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/github/" rel="tag"># github</a>
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/" rel="tag"># 代码版本管理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/articles/hello-world/" rel="prev" title="hello_world">
+      <i class="fa fa-chevron-left"></i> hello_world
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AF%AD%EF%BC%9Agit%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">导语：git是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85git"><span class="nav-number">2.</span> <span class="nav-text">安装git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDgit%E5%B9%B6%E7%9B%B4%E6%8E%A5%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">下载git并直接安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">配置全局参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">git的目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%EF%BC%88%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">工作区（）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">git的基础使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAgit%E4%BB%93%E5%BA%93"><span class="nav-number">4.1.</span> <span class="nav-text">创建git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">4.2.</span> <span class="nav-text">将文件添加到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">4.3.</span> <span class="nav-text">查看修改的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%82%E5%AD%98%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%8F%90%E4%BA%A4%E8%87%B3%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="nav-number">4.4.</span> <span class="nav-text">暂存区修改提交至本地仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">4.5.</span> <span class="nav-text">版本回退</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="喵式重战"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">喵式重战</p>
+  <div class="site-description" itemprop="description">人的一切痛苦，本质上都是对自己无能的愤怒。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/HeavyTiger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;HeavyTiger" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" title="E-Mail → http:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+    
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">喵式重战</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><!--
+<a href="https://icp.gov.moe/?keyword=20180708" rel="external nofollow noreferrer" target="_blank" data-pjax-state="" style="
+    border-bottom-width: 0px;
+">萌 ICP 备 20180708 号</a>
+//-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("6/8/2021 0:0:0");       //此处修改你的建站时间，注意格式
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已经存活了 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒，地球太危险了( >﹏<。)";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/z16.model.json"},"display":{"position":"right","hOffset":0,"vOffset":-20,"width":200,"height":400},"mobile":{"show":true,"scale":0.7},"react":{"opacity":0.85},"log":false});</script></body>
+</html>
