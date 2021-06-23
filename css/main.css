@@ -1311,7 +1311,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff8fff;
+  background: #201dff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2907,7 +2907,7 @@ code {
   }
 }
 .header-inner {
-  border-radius: 50px 50px 18px 18px;
+  border-radius: 18px 18px 18px 18px;
 }
 .site-brand-container {
   border-radius: 18px 18px 0 0;
@@ -2935,12 +2935,4 @@ code {
 }
 .post-body {
   font-size: 1em;
-}
-.theme-link {
-  color: #969696;
-  border-bottom: 1px solid #969696;
-}
-.theme-link:hover {
-  color: #969696;
-  border-bottom: 1px solid #969696;
 }
