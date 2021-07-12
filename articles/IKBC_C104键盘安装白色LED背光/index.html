@@ -21,31 +21,49 @@
     var CONFIG = {"hostname":"heavytiger.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":18,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HeavyTiger&#39;s Blogs">
-<meta property="og:url" content="https://heavytiger.github.io/index.html">
+  <meta name="description" content="键盘的痛点及改灯的理由我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IKBC_C104键盘安装白色LED背光">
+<meta property="og:url" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/index.html">
 <meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
-<meta property="og:description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
+<meta property="og:description" content="键盘的痛点及改灯的理由我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/1.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/2.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/3.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/4.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/5.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/6.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/7.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/8.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/9.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/10.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/11.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/12.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/13.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/14.jpg">
+<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/15.jpg">
+<meta property="article:published_time" content="2021-07-10T06:13:16.000Z">
+<meta property="article:modified_time" content="2021-07-10T06:13:16.000Z">
 <meta property="article:author" content="喵式重战">
-<meta property="article:tag" content="喵式重战,HeavyTiger,heavytiger,Blog,博客,java后端,后端,Linux,Spring,Java">
+<meta property="article:tag" content="键盘">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/1.jpg">
 
-<link rel="canonical" href="https://heavytiger.github.io/">
+<link rel="canonical" href="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>HeavyTiger's Blogs</title>
+  <title>IKBC_C104键盘安装白色LED背光 | HeavyTiger's Blogs</title>
   
 
 
@@ -189,10 +207,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
+
     
-          
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -208,10 +226,9 @@
       <meta itemprop="name" content="HeavyTiger's Blogs">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/" class="post-title-link" itemprop="url">IKBC_C104键盘安装白色LED背光</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          IKBC_C104键盘安装白色LED背光
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -232,7 +249,14 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -257,123 +281,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <!--此处为希望博客在首页显示的内容-->
+        <!--此处为希望博客在首页显示的内容-->
 
 <h2 id="键盘的痛点及改灯的理由"><a href="#键盘的痛点及改灯的理由" class="headerlink" title="键盘的痛点及改灯的理由"></a>键盘的痛点及改灯的理由</h2><p>我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+<span id="more"></span>
+<!-- markdownlint-disable MD041 MD002-->
 
-    
-    
-    
-
-    <div>
-    
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-    
-          
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="喵式重战">
-      <meta itemprop="description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HeavyTiger's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">git使用的基本技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-14 16:29:07" itemprop="dateCreated datePublished" datetime="2021-06-14T16:29:07+08:00">2021-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-23 15:28:49" itemprop="dateModified" datetime="2021-06-23T15:28:49+08:00">2021-06-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>21k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>19 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <!--此处为希望博客在首页显示的内容-->
-
-<h2 id="导语：git是什么"><a href="#导语：git是什么" class="headerlink" title="导语：git是什么"></a>导语：git是什么</h2><blockquote>
-<p>git是用于Linux内核开发的版本控制工具。与CVS、Subversion一类的集中式版本控制工具不同，它采用了分布式版本库的作法，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便。git的速度很快，这对于诸如Linux内核这样的大项目来说自然很重要。git最为出色的是它的合并追踪（merge tracing）能力。</p>
+<h2 id="键盘的拆卸"><a href="#键盘的拆卸" class="headerlink" title="键盘的拆卸"></a>键盘的拆卸</h2><p><img src="1.jpg" alt="IKBC C104键盘的外观"></p>
+<p>键盘的拆卸十分容易，键盘本身并未通过螺丝或者胶水进行固定，仅使用了8个卡扣进行上壳和底板的咬合固定。因此使用一字螺丝刀和小拨片去翘一下键盘的接缝处，可以很轻松的将上壳和底座分离，分离后如图所示，且可以看到红色的PCB板。</p>
+<p><img src="2.jpg" alt="键盘进行上下外壳的分离"></p>
+<p>在对外壳进行分离后，我们可以将钢板与PCB板拿离底座，注意，底座和PCB板之间存在排线，需要先将排线分离，再将钢板与PCB板取出。不要直接扯下排线，连接比较紧密，可以不断地晃动排线公口，之后松弛后可以很轻松地拔出排线。</p>
+<p><img src="3.jpg" alt="红色的PCB底座与排线"></p>
+<p>可以看到排线如下所示，不断晃动，即可拔出排线。</p>
+<p><img src="4.jpg" alt="排线的示意图"></p>
+<p>在取下底座之后，即可将键盘的键帽全部拔出(记得拍照作为键盘键位的标记，不然凭借记忆中的键位安装键帽会较为困难)，将所有的键帽拔出之后，可以看到红轴的轴体，在轴体上侧有一个安装F3规格的LED灯的开口，键盘的PCB板上已经存在线路和引脚，只需要将LED安装之后进行焊接即可。</p>
+<p><img src="5.jpg" alt="拆下键帽后的钢板以及PCB板"></p>
+<p>但是拆下键帽后，会发现钢板上有非常多的灰尘和程序猿的头发(头发，我的头发，呜呜呜)，所有使用镊子夹一块医用酒精棉进行擦拭，将油脂，毛发等脏东西清除干净。(PS:感谢舍友淳宝提供的酒精棉，阿里嘎多！)</p>
+<p><img src="6.jpg" alt="用酒精棉擦拭钢板表面，并使用镊子夹出毛发"></p>
+<h2 id="焊接LED灯珠"><a href="#焊接LED灯珠" class="headerlink" title="焊接LED灯珠"></a>焊接LED灯珠</h2><p>在使用了6片酒精棉擦拭(约30min)后，感觉还是键盘的干净度还算是可以看了，如下图，还算比较干净了。此时我们准备这次需要的耗材及工具：</p>
+<blockquote>
+<ul>
+<li>LED灯珠 F3规格 * 104(考虑到存在亮度不均衡，损坏的情况，建议采购120颗起步)       <strong>成本 0.03元 * 104</strong></li>
+<li>电焊及支架 * 1      <strong>成本20元 * 1</strong></li>
+<li>松香 * 1        <strong>成本1元 * 1</strong></li>
+<li>电焊丝 * 1      <strong>成本1元 * 1</strong></li>
+<li>剪线钳 * 1      <strong>成本3元 * 1</strong></li>
+<li>镊子        <strong>成本2元 * 1</strong></li>
+</ul>
 </blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<p>使用的这些工具已经在下图中给出，可以按照图片直接购入相应的工具耗材即可。</p>
+<p><img src="7.jpg" alt="耗材工具及清洁后的pcb板"></p>
+<p>将pcb板翻到背面，可以看到为了防止排线线材与较尖的金属触点发生刮蹭导致线材受损，使用了一块比较光滑的硬质塑料片，贴在了背板上。我们可以将这块塑料片拿下，便于LED灯珠的装配与焊接。</p>
+<p><img src="8.jpg" alt="将背板的塑料防护片取下"></p>
+<p>现在开始进行焊接操作，我们可以使用两个手指分别抵住LED灯防止移位和供应焊锡丝(PS:为了翘背板特意留的长指甲，但是并未使用到？拨片一翘就分离了)。这么操作的好处是焊接得到的引脚都非常正，不会弯曲，若之后LED出现故障，可以很轻易地将其取下；但是这样操作也会存在不便，安装到中间的部分将变得异常困难(也可以使用镊子夹住灯珠进行焊接)。所以我为了偷懒使用了较为简单的方式去进行焊接，即将两根引脚分别向两侧弯曲，这样引脚本身的倾斜就导致了不会出现灯珠移位的情况(缺点是若出现故障需要返工，很难将灯珠拔出来)，注意引脚的正负，PCB板上已经标记出了正极引脚。</p>
+<p><img src="9.jpg" alt="对灯珠的引脚进行焊接"></p>
+<p>焊接完成一排之后，我们对灯珠进行点亮测试，可以看到第一排一次性全部被点亮。</p>
+<p><img src="10.jpg" alt="第一排一次点亮"></p>
+<p>有了成功点亮的经验，艺高人胆大(感谢学校的电工实习，咳咳咳)我直接对接下来的两排一并安装灯珠，且全部一次点亮。</p>
+<p><img src="11.jpg" alt="三排成功点亮"></p>
+<p>最后将剩下的三排全部焊接，所有的灯珠在通电后全部一次点亮，非常完美。</p>
+<p><img src="12.jpg" alt="全部灯珠一次点亮"></p>
+<p>我们翻到PCB板的背面，焊点都还能保证比较饱满，由于引脚是歪着焊接的，看上去是歪歪扭扭的，但是还是能保证电气性能良好大。</p>
+<p><img src="13.jpg" alt="PCB背板焊点"></p>
+<p>由于买了150颗灯珠，所以最后还剩下了很多的灯珠，下图是剩下的灯珠和剪断的引脚。</p>
+<p><img src="14.jpg" alt="剩下的灯珠和剪断的引脚"></p>
+<p>装配完成后来看看效果吧！</p>
+<p><img src="15.jpg" alt="装配完成后点亮的效果"></p>
+<p>键盘有很多的灯光方案，老版本的C104有8种点亮方式，新版本的更换过主控后似乎只有3种基本点亮方式了。本人的键盘是在2019年10月购入，此时的版本为老版本，之后是新版本的可能性就大很多了。</p>
+<blockquote>
+<p><strong>点亮效果</strong></p>
+<ul>
+<li>Fn + 1  键盘灯常亮</li>
+<li>Fn + 2  流水闪烁效果(跑马灯)</li>
+<li>Fn + 3  按哪里亮哪里</li>
+<li>Fn + 4  随机闪烁</li>
+<li>Fn + 5  涟漪效果</li>
+<li>Fn + 6  呼吸灯</li>
+<li>Fn + 7  Esc、ASDW、方向键常亮</li>
+<li>Fn + 8  QWER处常亮(可能是LOL的按键)</li>
+<li>Fn + ↑  背光亮度增加</li>
+<li>Fn + ↓  背光亮度降低</li>
+<li>Fn + →  闪烁频率增加</li>
+<li>Fn + ←  闪烁频率降低</li>
+</ul>
+</blockquote>
+
     </div>
 
     
@@ -382,17 +354,74 @@
 
     <div>
     
+        <div>
+    
+        <hr>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文到此结束 <i class="fas fa-book-open"></i> 感谢您的阅读-------------</div>
+    
+</div>
+    
     </div>
+        <div class="reward-container">
+  <div>谢谢你请我喝肥宅快乐水(๑＞ڡ＜) ☆☆☆</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatimg.jpg" alt="喵式重战 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipayimg.jpg" alt="喵式重战 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>喵式重战
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/" title="IKBC_C104键盘安装白色LED背光">https://heavytiger.github.io/articles/IKBC_C104键盘安装白色LED背光/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%94%AE%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 键盘</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/" rel="prev" title="git使用的基本技巧">
+      <i class="fa fa-chevron-left"></i> git使用的基本技巧
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-    
-
   
 
 
@@ -445,6 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E7%9A%84%E7%97%9B%E7%82%B9%E5%8F%8A%E6%94%B9%E7%81%AF%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">键盘的痛点及改灯的理由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E7%9A%84%E6%8B%86%E5%8D%B8"><span class="nav-number">2.</span> <span class="nav-text">键盘的拆卸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%84%8A%E6%8E%A5LED%E7%81%AF%E7%8F%A0"><span class="nav-number">3.</span> <span class="nav-text">焊接LED灯珠</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
