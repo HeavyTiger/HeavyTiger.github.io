@@ -21,36 +21,31 @@
     var CONFIG = {"hostname":"heavytiger.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":18,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="键盘的痛点及改灯的理由我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。">
+  <meta name="description" content="作为web开发人员，开发完的网页肯定是想通过ip或域名在浏览器上访问 用户使用浏览器访问网页就是发送http请求，web服务器响应请求的过程，所以解析http的工作就交给web服务器了 web服务器有很多，Tomcat是一款小巧灵活并使用最为广泛的轻量级Web应用服务器，提供了对Jsp和Servlet的支持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IKBC_C104键盘安装白色LED背光">
-<meta property="og:url" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/index.html">
+<meta property="og:title" content="Tomcat服务器初探">
+<meta property="og:url" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
-<meta property="og:description" content="键盘的痛点及改灯的理由我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。">
+<meta property="og:description" content="作为web开发人员，开发完的网页肯定是想通过ip或域名在浏览器上访问 用户使用浏览器访问网页就是发送http请求，web服务器响应请求的过程，所以解析http的工作就交给web服务器了 web服务器有很多，Tomcat是一款小巧灵活并使用最为广泛的轻量级Web应用服务器，提供了对Jsp和Servlet的支持">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/1.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/2.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/3.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/4.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/5.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/6.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/7.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/8.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/9.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/10.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/11.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/12.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/13.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/14.jpg">
-<meta property="og:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/15.jpg">
-<meta property="article:published_time" content="2021-07-10T06:13:16.000Z">
-<meta property="article:modified_time" content="2021-07-10T06:13:16.000Z">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920222839029.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920224436509.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920225448704.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920230636618.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920230757407.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920232900527.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920232959173.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920233049107.png">
+<meta property="article:published_time" content="2021-09-20T13:38:58.000Z">
+<meta property="article:modified_time" content="2021-09-20T13:38:58.000Z">
 <meta property="article:author" content="喵式重战">
-<meta property="article:tag" content="键盘">
+<meta property="article:tag" content="JavaEE">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="服务器部署">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/1.jpg">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920222839029.png">
 
-<link rel="canonical" href="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/">
+<link rel="canonical" href="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/">
 
 
 <script id="page-configurations">
@@ -63,7 +58,7 @@
   };
 </script>
 
-  <title>IKBC_C104键盘安装白色LED背光 | HeavyTiger's Blogs</title>
+  <title>Tomcat服务器初探 | HeavyTiger's Blogs</title>
   
 
 
@@ -214,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/">
+    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          IKBC_C104键盘安装白色LED背光
+          Tomcat服务器初探
         </h1>
 
         <div class="post-meta">
@@ -237,7 +232,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-10 14:13:16" itemprop="dateCreated datePublished" datetime="2021-07-10T14:13:16+08:00">2021-07-10</time>
+              <time title="创建时间：2021-09-20 21:38:58" itemprop="dateCreated datePublished" datetime="2021-09-20T21:38:58+08:00">2021-09-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%91%B8%E9%B1%BC%E4%B8%AD%E7%9A%84%E5%B0%8F%E7%A1%AE%E5%B9%B8/" itemprop="url" rel="index"><span itemprop="name">摸鱼中的小确幸</span></a>
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
                 </span>
             </span>
 
@@ -262,14 +257,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -283,68 +278,241 @@
       
         <!--此处为希望博客在首页显示的内容-->
 
-<h2 id="键盘的痛点及改灯的理由"><a href="#键盘的痛点及改灯的理由" class="headerlink" title="键盘的痛点及改灯的理由"></a>键盘的痛点及改灯的理由</h2><p>我在19年大一进入学校的时候购入了一把机械键盘，型号是IKBC C104。特色是轴体使用了cherry红轴，PBT键帽，非常适合我这种重度硫酸手的人，此外该键盘性价比极高，在200-300元价位中无出其右。但是有个痛点就是键盘没有带灯，寝室熄灯后敲代码会有些难受(虽然可以盲打，但是仍需要手指去寻找J和F的触点，摸黑还是很难受)因此决定尝试自行安装LED背光。</p>
+<ul>
+<li>作为web开发人员，开发完的网页肯定是想通过ip或域名在浏览器上访问</li>
+<li>用户使用浏览器访问网页就是发送http请求，web服务器响应请求的过程，所以解析http的工作就交给web服务器了</li>
+<li>web服务器有很多，Tomcat是一款小巧灵活并使用最为广泛的轻量级Web应用服务器，提供了对Jsp和Servlet的支持</li>
+</ul>
 <span id="more"></span>
 <!-- markdownlint-disable MD041 MD002-->
 
-<h2 id="键盘的拆卸"><a href="#键盘的拆卸" class="headerlink" title="键盘的拆卸"></a>键盘的拆卸</h2><p><img src="1.jpg" alt="IKBC C104键盘的外观"></p>
-<p>键盘的拆卸十分容易，键盘本身并未通过螺丝或者胶水进行固定，仅使用了8个卡扣进行上壳和底板的咬合固定。因此使用一字螺丝刀和小拨片去翘一下键盘的接缝处，可以很轻松的将上壳和底座分离，分离后如图所示，且可以看到红色的PCB板。</p>
-<p><img src="2.jpg" alt="键盘进行上下外壳的分离"></p>
-<p>在对外壳进行分离后，我们可以将钢板与PCB板拿离底座，注意，底座和PCB板之间存在排线，需要先将排线分离，再将钢板与PCB板取出。不要直接扯下排线，连接比较紧密，可以不断地晃动排线公口，之后松弛后可以很轻松地拔出排线。</p>
-<p><img src="3.jpg" alt="红色的PCB底座与排线"></p>
-<p>可以看到排线如下所示，不断晃动，即可拔出排线。</p>
-<p><img src="4.jpg" alt="排线的示意图"></p>
-<p>在取下底座之后，即可将键盘的键帽全部拔出(记得拍照作为键盘键位的标记，不然凭借记忆中的键位安装键帽会较为困难)，将所有的键帽拔出之后，可以看到红轴的轴体，在轴体上侧有一个安装F3规格的LED灯的开口，键盘的PCB板上已经存在线路和引脚，只需要将LED安装之后进行焊接即可。</p>
-<p><img src="5.jpg" alt="拆下键帽后的钢板以及PCB板"></p>
-<p>但是拆下键帽后，会发现钢板上有非常多的灰尘和程序猿的头发(头发，我的头发，呜呜呜)，所有使用镊子夹一块医用酒精棉进行擦拭，将油脂，毛发等脏东西清除干净。(PS:感谢舍友淳宝提供的酒精棉，阿里嘎多！)</p>
-<p><img src="6.jpg" alt="用酒精棉擦拭钢板表面，并使用镊子夹出毛发"></p>
-<h2 id="焊接LED灯珠"><a href="#焊接LED灯珠" class="headerlink" title="焊接LED灯珠"></a>焊接LED灯珠</h2><p>在使用了6片酒精棉擦拭(约30min)后，感觉还是键盘的干净度还算是可以看了，如下图，还算比较干净了。此时我们准备这次需要的耗材及工具：</p>
-<blockquote>
+<h3 id="1、版本支持"><a href="#1、版本支持" class="headerlink" title="1、版本支持"></a>1、版本支持</h3><table>
+<caption>
+不同版本的 Tomcat 对各种规范的支持</caption>
+<tbody>
+<tr>
+<th>
+Tomcat 版本</th>
+<th>
+最新子版本</th>
+<th>
+Servlet<br>
+规范</th>
+<th>
+JSP<br>
+规范</th>
+<th>
+EL<br>
+规范</th>
+<th>
+WebSocket<br>
+规范</th>
+<th>
+认证（JASIC）<br>
+规范</th>
+<th>
+Java 版本</th>
+</tr>
+<tr>
+<td>
+10.0.x</td>
+<td>
+10.0.0</td>
+<td>
+5.0</td>
+<td>
+3.0</td>
+<td>
+4.0</td>
+<td>
+2.0</td>
+<td>
+2.0</td>
+<td>
+8 以及更高</td>
+</tr>
+<tr>
+<td>
+9.0.x</td>
+<td>
+9.0.36</td>
+<td>
+4.0</td>
+<td>
+2.3</td>
+<td>
+3.0</td>
+<td>
+1.1</td>
+<td>
+1.1</td>
+<td>
+8 以及更高</td>
+</tr>
+<tr>
+<td>
+8.5.x</td>
+<td>
+8.5.56</td>
+<td>
+3.1</td>
+<td>
+2.3</td>
+<td>
+3.0</td>
+<td>
+1.1</td>
+<td>
+1.1</td>
+<td>
+7 以及更高</td>
+</tr>
+<tr>
+<td>
+8.0.x（已被取代）</td>
+<td>
+8.0.53（已被取代）</td>
+<td>
+3.1</td>
+<td>
+2.3</td>
+<td>
+3.0</td>
+<td>
+1.1</td>
+<td>
+N/A</td>
+<td>
+7 以及更高</td>
+</tr>
+<tr>
+<td>
+7.0.x</td>
+<td>
+7.0.104</td>
+<td>
+3.0</td>
+<td>
+2.2</td>
+<td>
+2.2</td>
+<td>
+1.1</td>
+<td>
+N/A</td>
+<td>
+6 以及更高<br>
+（对于 WebSocket，支持 7 以及更高）</td>
+</tr>
+<tr>
+<td>
+6.0.x（已废弃）</td>
+<td>
+6.0.53（已废弃）</td>
+<td>
+2.5</td>
+<td>
+2.1</td>
+<td>
+2.1</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+5 以及更高</td>
+</tr>
+<tr>
+<td>
+5.5.x（已废弃）</td>
+<td>
+5.5.36（已废弃）</td>
+<td>
+2.4</td>
+<td>
+2.0</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+1.4 以及更高</td>
+</tr>
+<tr>
+<td>
+4.1.x（已废弃）</td>
+<td>
+4.1.40（已废弃）</td>
+<td>
+2.3</td>
+<td>
+1.2</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+1.3 以及更高</td>
+</tr>
+<tr>
+<td>
+3.3.x（已废弃）</td>
+<td>
+3.3.2（已废弃）</td>
+<td>
+2.2</td>
+<td>
+1.1</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+N/A</td>
+<td>
+1.1 以及更高</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="2、目录与文件"><a href="#2、目录与文件" class="headerlink" title="2、目录与文件"></a>2、目录与文件</h3><p>以下是 Tomcat 的一些关键目录：</p>
 <ul>
-<li>LED灯珠 F3规格 * 104(考虑到存在亮度不均衡，损坏的情况，建议采购120颗起步)       <strong>成本 0.03元 * 104</strong></li>
-<li>电焊及支架 * 1      <strong>成本20元 * 1</strong></li>
-<li>松香 * 1        <strong>成本1元 * 1</strong></li>
-<li>电焊丝 * 1      <strong>成本1元 * 1</strong></li>
-<li>剪线钳 * 1      <strong>成本3元 * 1</strong></li>
-<li>镊子        <strong>成本2元 * 1</strong></li>
+<li><strong>/bin</strong>     命令中心：存放用于启动及关闭的文件，以及其他一些脚本。其中，UNIX 系统专用的 <code>*.sh</code> 文件在功能上等同欲Windows 系统专用的 <code>*.bat</code> 文件。因为 Win32 的命令行缺乏某些功能，所以又额外地加入了一些文件。</li>
+<li><strong>/conf</strong>    配置中心：配置文件及相关的 DTD。其中最重要的文件是 server.xml，这是容器的主配置文件。</li>
+<li>/lib     Tomcat 的库文件。Tomcat 运行时需要的 jar 包所在的目录。</li>
+<li>/temp    存储临时产生的文件，即缓存。</li>
+<li><strong>/log</strong>     日志文件的默认目录。</li>
+<li><strong>/webapps</strong> 存放 Web 应用的相关文件。web 应用放置到此目录下浏览器可以直接访问。</li>
+<li>/work    编译以后的 class 文件。</li>
 </ul>
-</blockquote>
-<p>使用的这些工具已经在下图中给出，可以按照图片直接购入相应的工具耗材即可。</p>
-<p><img src="7.jpg" alt="耗材工具及清洁后的pcb板"></p>
-<p>将pcb板翻到背面，可以看到为了防止排线线材与较尖的金属触点发生刮蹭导致线材受损，使用了一块比较光滑的硬质塑料片，贴在了背板上。我们可以将这块塑料片拿下，便于LED灯珠的装配与焊接。</p>
-<p><img src="8.jpg" alt="将背板的塑料防护片取下"></p>
-<p>现在开始进行焊接操作，我们可以使用两个手指分别抵住LED灯防止移位和供应焊锡丝(PS:为了翘背板特意留的长指甲，但是并未使用到？拨片一翘就分离了)。这么操作的好处是焊接得到的引脚都非常正，不会弯曲，若之后LED出现故障，可以很轻易地将其取下；但是这样操作也会存在不便，安装到中间的部分将变得异常困难(也可以使用镊子夹住灯珠进行焊接)。所以我为了偷懒使用了较为简单的方式去进行焊接，即将两根引脚分别向两侧弯曲，这样引脚本身的倾斜就导致了不会出现灯珠移位的情况(缺点是若出现故障需要返工，很难将灯珠拔出来)，注意引脚的正负，PCB板上已经标记出了正极引脚。</p>
-<p><img src="9.jpg" alt="对灯珠的引脚进行焊接"></p>
-<p>焊接完成一排之后，我们对灯珠进行点亮测试，可以看到第一排一次性全部被点亮。</p>
-<p><img src="10.jpg" alt="第一排一次点亮"></p>
-<p>有了成功点亮的经验，艺高人胆大(感谢学校的电工实习，咳咳咳)我直接对接下来的两排一并安装灯珠，且全部一次点亮。</p>
-<p><img src="11.jpg" alt="三排成功点亮"></p>
-<p>最后将剩下的三排全部焊接，所有的灯珠在通电后全部一次点亮，非常完美。</p>
-<p><img src="12.jpg" alt="全部灯珠一次点亮"></p>
-<p>我们翻到PCB板的背面，焊点都还能保证比较饱满，由于引脚是歪着焊接的，看上去是歪歪扭扭的，但是还是能保证电气性能良好大。</p>
-<p><img src="13.jpg" alt="PCB背板焊点"></p>
-<p>由于买了150颗灯珠，所以最后还剩下了很多的灯珠，下图是剩下的灯珠和剪断的引脚。</p>
-<p><img src="14.jpg" alt="剩下的灯珠和剪断的引脚"></p>
-<p>装配完成后来看看效果吧！</p>
-<p><img src="15.jpg" alt="装配完成后点亮的效果"></p>
-<p>键盘有很多的灯光方案，老版本的C104有8种点亮方式，新版本的更换过主控后似乎只有3种基本点亮方式了。本人的键盘是在2019年10月购入，此时的版本为老版本，之后是新版本的可能性就大很多了。</p>
-<blockquote>
-<p><strong>点亮效果</strong></p>
-<ul>
-<li>Fn + 1  键盘灯常亮</li>
-<li>Fn + 2  流水闪烁效果(跑马灯)</li>
-<li>Fn + 3  按哪里亮哪里</li>
-<li>Fn + 4  随机闪烁</li>
-<li>Fn + 5  涟漪效果</li>
-<li>Fn + 6  呼吸灯</li>
-<li>Fn + 7  Esc、ASDW、方向键常亮</li>
-<li>Fn + 8  QWER处常亮(可能是LOL的按键)</li>
-<li>Fn + ↑  背光亮度增加</li>
-<li>Fn + ↓  背光亮度降低</li>
-<li>Fn + →  闪烁频率增加</li>
-<li>Fn + ←  闪烁频率降低</li>
-</ul>
-</blockquote>
+<h3 id="3、安装方法"><a href="#3、安装方法" class="headerlink" title="3、安装方法"></a>3、安装方法</h3><p>首先需要安装JRE，不过多演示如何安装运行环境</p>
+<p>使用魔法去该网站下载Tomcat服务器压缩文件：<a target="_blank" rel="noopener" href="http://tomcat.apache.org/">Apache Tomcat® - Welcome!</a></p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920222839029.png" alt="image-20210920222839029"></p>
+<p>下载完成后，进行解压</p>
+<p>本人尝试在Windows下部署，之后JavaEE完成之后，将再演示部署到Linux服务器上。</p>
+<h3 id="4、启动Tomcat"><a href="#4、启动Tomcat" class="headerlink" title="4、启动Tomcat"></a>4、启动Tomcat</h3><p>安装配置好了 Tomcat 和 JDK，就可以将 Tomcat 跑起来了。进入 Tomcat 安装目录下的 bin 文件夹，找到 startup.bat 脚本文件，双击即可运行 Tomcat。</p>
+<p>若在Linux下，可以使用<code>./startup.sh</code>启动服务器</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920224436509.png" alt="image-20210920224436509"></p>
+<h4 id="4-1、解决显示乱码问题"><a href="#4-1、解决显示乱码问题" class="headerlink" title="4.1、解决显示乱码问题"></a>4.1、解决显示乱码问题</h4><p>在安装路径的conf文件夹下找到<code>logging.properties</code>的文件，将其中的<code>java.util.logging.ConsoleHandler.encoding = UTF-8</code>后的<code>UTF-8</code>修改为GBK编码(原因是憨批Windows的默认编码是GBK编码，若改Windows为UTF-8，相信我会有更多的bug……)</p>
+<h4 id="4-2、访问网站"><a href="#4-2、访问网站" class="headerlink" title="4.2、访问网站"></a>4.2、访问网站</h4><p>访问<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 即可看到如下所示页面，说明服务启动成功</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920225448704.png" alt="image-20210920225448704"></p>
+<h3 id="5、如何停止Tomcat服务器"><a href="#5、如何停止Tomcat服务器" class="headerlink" title="5、如何停止Tomcat服务器"></a>5、如何停止Tomcat服务器</h3><p>1.在windows下直接点击powershell右上角的【x】进行关闭</p>
+<p>2.使用快捷键Ctrl+C关闭服务器</p>
+<p>3.找到Tomcat安装路径下bin目录中的shutdown.bat关闭服务器，Linux使用shutdown.sh</p>
+<h3 id="6、在IDEA中管理配置Tomcat服务器"><a href="#6、在IDEA中管理配置Tomcat服务器" class="headerlink" title="6、在IDEA中管理配置Tomcat服务器"></a>6、在IDEA中管理配置Tomcat服务器</h3><p>1.在IDEA中建立JavaEE应用时选择服务器</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920230636618.png" alt="image-20210920230636618"></p>
+<p>未创建过服务器时可以新建服务器</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920230757407.png" alt="image-20210920230757407"></p>
+<p>文件结构如下所示，使用Maven进行JAR包管理：</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920232900527.png" alt="image-20210920232900527"></p>
+<p>配置Tomcat启动选项</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920232959173.png" alt="image-20210920232959173"></p>
+<p>启动服务器：</p>
+<p><img src="Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/image-20210920233049107.png" alt="image-20210920233049107"></p>
 
     </div>
 
@@ -391,7 +559,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://heavytiger.github.io/articles/IKBC_C104%E9%94%AE%E7%9B%98%E5%AE%89%E8%A3%85%E7%99%BD%E8%89%B2LED%E8%83%8C%E5%85%89/" title="IKBC_C104键盘安装白色LED背光">https://heavytiger.github.io/articles/IKBC_C104键盘安装白色LED背光/</a>
+    <a href="https://heavytiger.github.io/articles/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E6%8E%A2/" title="Tomcat服务器初探">https://heavytiger.github.io/articles/Tomcat服务器初探/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -403,7 +571,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E9%94%AE%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 键盘</a>
+              <a href="/tags/JavaEE/" rel="tag"><i class="fa fa-tag"></i> JavaEE</a>
+              <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/" rel="tag"><i class="fa fa-tag"></i> 服务器部署</a>
           </div>
 
         
@@ -412,12 +582,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/articles/git%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7/" rel="prev" title="git使用的基本技巧">
-      <i class="fa fa-chevron-left"></i> git使用的基本技巧
+    <a href="/articles/MySQL%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="prev" title="MySQL基础学习">
+      <i class="fa fa-chevron-left"></i> MySQL基础学习
     </a></div>
       <div class="post-nav-item">
-    <a href="/articles/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" rel="next" title="二叉树的遍历">
-      二叉树的遍历 <i class="fa fa-chevron-right"></i>
+    <a href="/articles/JavaEE-Servlet%E5%88%9D%E6%8E%A2/" rel="next" title="JavaEE_Servlet初探">
+      JavaEE_Servlet初探 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -477,7 +647,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E7%9A%84%E7%97%9B%E7%82%B9%E5%8F%8A%E6%94%B9%E7%81%AF%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">键盘的痛点及改灯的理由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E7%9A%84%E6%8B%86%E5%8D%B8"><span class="nav-number">2.</span> <span class="nav-text">键盘的拆卸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%84%8A%E6%8E%A5LED%E7%81%AF%E7%8F%A0"><span class="nav-number">3.</span> <span class="nav-text">焊接LED灯珠</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%89%88%E6%9C%AC%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">1、版本支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2、目录与文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3、安装方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8Tomcat"><span class="nav-number">4.</span> <span class="nav-text">4、启动Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1%E3%80%81%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、解决显示乱码问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2%E3%80%81%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、访问网站</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">5、如何停止Tomcat服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%9C%A8IDEA%E4%B8%AD%E7%AE%A1%E7%90%86%E9%85%8D%E7%BD%AETomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">6、在IDEA中管理配置Tomcat服务器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
