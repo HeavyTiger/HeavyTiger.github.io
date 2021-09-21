@@ -1,12 +1,12 @@
 <h1 align="center">HeavyTiger's Blogs</h1>
 
-[![website: https://heavytiger.github.io/ (shields.io)](https://img.shields.io/badge/website-https%3A%2F%2Fheavytiger.github.io%2F-brightgreen)]([HeavyTiger's Blogs](https://heavytiger.github.io/))[![hexo: 5.4.0 (shields.io)](https://img.shields.io/badge/hexo-5.4.0-blue)]([Hexo](https://hexo.io/zh-cn/))[![theme: NexT (shields.io)](https://img.shields.io/badge/theme-NexT-yellow)]([NexT 使用文档 (iissnan.com)](https://theme-next.iissnan.com/))
+[![website: https://heavytiger.github.io/ (shields.io)](https://img.shields.io/badge/website-https%3A%2F%2Fheavytiger.github.io%2F-brightgreen)](https://heavytiger.github.io/) [![hexo: 5.4.0 (shields.io)](https://img.shields.io/badge/hexo-5.4.0-blue)](https://hexo.io/zh-cn/) [![theme: NexT (shields.io)](https://img.shields.io/badge/theme-NexT-yellow)](https://theme-next.iissnan.com/)
 
 <hr>
 
 这是一个使用hexo部署的博客，该博客将作为本人的学习记录，我将把所有学习过程中的笔记记录在该博客中。该README页面作为Java技术栈掌握情况进行统计归纳。
 
-博客文章数：4篇
+博客文章数：5篇
 
 
 <h3 align="center">Java技术栈掌握情况</h3>
