@@ -19,17 +19,17 @@
 
   进度：基本了解
 
-- [ ] Java并发编程
+- [x] Java并发编程
 
   进度：基本了解
 
-- [ ] 关系型数据库MySQL
+- [x] 关系型数据库MySQL
 
   进度：基本掌握使用方法
 
-- [ ] html, css, JavaScript前端基础
+- [x] HTML, CSS, JavaScript前端基础
 
-  进度：html基本掌握
+  进度：HTML, CSS, JavaScript基本掌握
 
 - [ ] Java Web开发基础
 
