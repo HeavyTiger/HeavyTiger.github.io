@@ -286,7 +286,7 @@
 <span id="more"></span>
 <!-- markdownlint-disable MD041 MD002-->
 
-<h3 id="1、版本支持"><a href="#1、版本支持" class="headerlink" title="1、版本支持"></a>1、版本支持</h3><table>
+<h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><table>
 <caption>
 不同版本的 Tomcat 对各种规范的支持</caption>
 <tbody>
@@ -479,7 +479,7 @@ N/A</td>
 </tbody>
 </table>
 
-<h3 id="2、目录与文件"><a href="#2、目录与文件" class="headerlink" title="2、目录与文件"></a>2、目录与文件</h3><p>以下是 Tomcat 的一些关键目录：</p>
+<h2 id="目录与文件"><a href="#目录与文件" class="headerlink" title="目录与文件"></a>目录与文件</h2><p>以下是 Tomcat 的一些关键目录：</p>
 <ul>
 <li><strong>/bin</strong>     命令中心：存放用于启动及关闭的文件，以及其他一些脚本。其中，UNIX 系统专用的 <code>*.sh</code> 文件在功能上等同欲Windows 系统专用的 <code>*.bat</code> 文件。因为 Win32 的命令行缺乏某些功能，所以又额外地加入了一些文件。</li>
 <li><strong>/conf</strong>    配置中心：配置文件及相关的 DTD。其中最重要的文件是 server.xml，这是容器的主配置文件。</li>
@@ -489,21 +489,21 @@ N/A</td>
 <li><strong>/webapps</strong> 存放 Web 应用的相关文件。web 应用放置到此目录下浏览器可以直接访问。</li>
 <li>/work    编译以后的 class 文件。</li>
 </ul>
-<h3 id="3、安装方法"><a href="#3、安装方法" class="headerlink" title="3、安装方法"></a>3、安装方法</h3><p>首先需要安装JRE，不过多演示如何安装运行环境</p>
+<h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><p>首先需要安装JRE，不过多演示如何安装运行环境</p>
 <p>使用魔法去该网站下载Tomcat服务器压缩文件：<a target="_blank" rel="noopener" href="http://tomcat.apache.org/">Apache Tomcat® - Welcome!</a></p>
 <p><img src="image-20210920222839029.png" alt="image-20210920222839029"></p>
 <p>下载完成后，进行解压</p>
 <p>本人尝试在Windows下部署，之后JavaEE完成之后，将再演示部署到Linux服务器上。</p>
-<h3 id="4、启动Tomcat"><a href="#4、启动Tomcat" class="headerlink" title="4、启动Tomcat"></a>4、启动Tomcat</h3><p>安装配置好了 Tomcat 和 JDK，就可以将 Tomcat 跑起来了。进入 Tomcat 安装目录下的 bin 文件夹，找到 startup.bat 脚本文件，双击即可运行 Tomcat。</p>
+<h2 id="启动Tomcat"><a href="#启动Tomcat" class="headerlink" title="启动Tomcat"></a>启动Tomcat</h2><p>安装配置好了 Tomcat 和 JDK，就可以将 Tomcat 跑起来了。进入 Tomcat 安装目录下的 bin 文件夹，找到 startup.bat 脚本文件，双击即可运行 Tomcat。</p>
 <p>若在Linux下，可以使用<code>./startup.sh</code>启动服务器</p>
 <p><img src="image-20210920224436509.png" alt="image-20210920224436509"></p>
-<h4 id="4-1、解决显示乱码问题"><a href="#4-1、解决显示乱码问题" class="headerlink" title="4.1、解决显示乱码问题"></a>4.1、解决显示乱码问题</h4><p>在安装路径的conf文件夹下找到<code>logging.properties</code>的文件，将其中的<code>java.util.logging.ConsoleHandler.encoding = UTF-8</code>后的<code>UTF-8</code>修改为GBK编码(原因是憨批Windows的默认编码是GBK编码，若改Windows为UTF-8，相信我会有更多的bug……)</p>
-<h4 id="4-2、访问网站"><a href="#4-2、访问网站" class="headerlink" title="4.2、访问网站"></a>4.2、访问网站</h4><p>访问<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 即可看到如下所示页面，说明服务启动成功</p>
+<h3 id="解决显示乱码问题"><a href="#解决显示乱码问题" class="headerlink" title="解决显示乱码问题"></a>解决显示乱码问题</h3><p>在安装路径的conf文件夹下找到<code>logging.properties</code>的文件，将其中的<code>java.util.logging.ConsoleHandler.encoding = UTF-8</code>后的<code>UTF-8</code>修改为GBK编码(原因是憨批Windows的默认编码是GBK编码，若改Windows为UTF-8，相信我会有更多的bug……)</p>
+<h3 id="访问网站"><a href="#访问网站" class="headerlink" title="访问网站"></a>访问网站</h3><p>访问<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 即可看到如下所示页面，说明服务启动成功</p>
 <p><img src="image-20210920225448704.png" alt="image-20210920225448704"></p>
-<h3 id="5、如何停止Tomcat服务器"><a href="#5、如何停止Tomcat服务器" class="headerlink" title="5、如何停止Tomcat服务器"></a>5、如何停止Tomcat服务器</h3><p>1.在windows下直接点击powershell右上角的【x】进行关闭</p>
+<h2 id="如何停止Tomcat服务器"><a href="#如何停止Tomcat服务器" class="headerlink" title="如何停止Tomcat服务器"></a>如何停止Tomcat服务器</h2><p>1.在windows下直接点击powershell右上角的【x】进行关闭</p>
 <p>2.使用快捷键Ctrl+C关闭服务器</p>
 <p>3.找到Tomcat安装路径下bin目录中的shutdown.bat关闭服务器，Linux使用shutdown.sh</p>
-<h3 id="6、在IDEA中管理配置Tomcat服务器"><a href="#6、在IDEA中管理配置Tomcat服务器" class="headerlink" title="6、在IDEA中管理配置Tomcat服务器"></a>6、在IDEA中管理配置Tomcat服务器</h3><p>1.在IDEA中建立JavaEE应用时选择服务器</p>
+<h2 id="在IDEA中管理配置Tomcat服务器"><a href="#在IDEA中管理配置Tomcat服务器" class="headerlink" title="在IDEA中管理配置Tomcat服务器"></a>在IDEA中管理配置Tomcat服务器</h2><p>1.在IDEA中建立JavaEE应用时选择服务器</p>
 <p><img src="image-20210920230636618.png" alt="image-20210920230636618"></p>
 <p>未创建过服务器时可以新建服务器</p>
 <p><img src="image-20210920230757407.png" alt="image-20210920230757407"></p>
@@ -647,7 +647,7 @@ N/A</td>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%89%88%E6%9C%AC%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">1、版本支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2、目录与文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3、安装方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8Tomcat"><span class="nav-number">4.</span> <span class="nav-text">4、启动Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1%E3%80%81%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、解决显示乱码问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2%E3%80%81%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、访问网站</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">5、如何停止Tomcat服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%9C%A8IDEA%E4%B8%AD%E7%AE%A1%E7%90%86%E9%85%8D%E7%BD%AETomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">6、在IDEA中管理配置Tomcat服务器</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E6%94%AF%E6%8C%81"><span class="nav-number">1.</span> <span class="nav-text">版本支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">目录与文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">安装方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Tomcat"><span class="nav-number">4.</span> <span class="nav-text">启动Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%98%BE%E7%A4%BA%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">解决显示乱码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99"><span class="nav-number">4.2.</span> <span class="nav-text">访问网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">如何停止Tomcat服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8IDEA%E4%B8%AD%E7%AE%A1%E7%90%86%E9%85%8D%E7%BD%AETomcat%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">在IDEA中管理配置Tomcat服务器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -691,6 +691,16 @@ N/A</td>
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tzhiy.github.io/" title="https:&#x2F;&#x2F;tzhiy.github.io&#x2F;" rel="noopener" target="_blank">tzhiy's Blog</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
         <div class="back-to-top motion-element">
@@ -725,7 +735,7 @@ N/A</td>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">104k</span>
+    <span title="站点总字数">103k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
