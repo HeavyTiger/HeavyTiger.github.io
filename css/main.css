@@ -1306,7 +1306,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a3f9ff;
+  background: #2e61fb;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2923,11 +2923,17 @@ blockquote {
   background-color: rgba(52,115,176,0.1);
   position: relative;
 }
+.post-body strong {
+  color: #ff6eb4;
+}
+.post-body th {
+  text-align: center;
+}
 .headband {
   display: none;
 }
 .footer-inner {
-  color: #07031a;
+  color: #ccc;
 }
 ::selection {
   background: rgba(0,149,255,0.2);
