@@ -116,20 +116,6 @@
   </url>
   
   <url>
-    <loc>https://heavytiger.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://heavytiger.github.io/tags/%E6%A0%91/</loc>
-    <lastmod>2021-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://heavytiger.github.io/tags/JavaEE/</loc>
     <lastmod>2021-12-08</lastmod>
     <changefreq>daily</changefreq>
@@ -145,6 +131,20 @@
   
   <url>
     <loc>https://heavytiger.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2021-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heavytiger.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2021-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://heavytiger.github.io/tags/%E6%A0%91/</loc>
     <lastmod>2021-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -195,14 +195,14 @@
   </url>
   
   <url>
-    <loc>https://heavytiger.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://heavytiger.github.io/categories/JavaWeb/</loc>
     <lastmod>2021-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://heavytiger.github.io/categories/JavaWeb/</loc>
+    <loc>https://heavytiger.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
