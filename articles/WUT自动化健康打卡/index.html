@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="code-2EuuuTEL7g">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heavytiger.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":18,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="众所周知，WUT是一所为学生健康着想的大学，需要学生每日在晚8点前进行健康打卡，但是heavytiger同学经常摸鱼会忘记打卡，引发年级群中的“友好通知”，这样会让人很困扰，恰逢heavytiger同学某日逛B站时，发现一研究生学长通过python实现了自动化打卡，特研究一日，实现了自动化健康打卡。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WUT自动化健康打卡">
+<meta property="og:url" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/index.html">
+<meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
+<meta property="og:description" content="众所周知，WUT是一所为学生健康着想的大学，需要学生每日在晚8点前进行健康打卡，但是heavytiger同学经常摸鱼会忘记打卡，引发年级群中的“友好通知”，这样会让人很困扰，恰逢heavytiger同学某日逛B站时，发现一研究生学长通过python实现了自动化打卡，特研究一日，实现了自动化健康打卡。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211209222108891.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211209224013336.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211209231909197.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211210000041198.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211210000129630.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211210000948325.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211210001054621.png">
+<meta property="article:published_time" content="2021-12-09T02:37:36.000Z">
+<meta property="article:modified_time" content="2021-12-09T02:37:36.000Z">
+<meta property="article:author" content="喵式重战">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/image-20211209222108891.png">
+
+<link rel="canonical" href="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>WUT自动化健康打卡 | HeavyTiger's Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+   <!--动态线条背景-->
+    <script type="text/javascript"color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+   
+   <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HeavyTiger's Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">逆水行舟</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/HeavyTiger" class="github-corner" title="喵喵喵~~~" aria-label="喵喵喵~~~" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="喵式重战">
+      <meta itemprop="description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HeavyTiger's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WUT自动化健康打卡
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-09 10:37:36" itemprop="dateCreated datePublished" datetime="2021-12-09T10:37:36+08:00">2021-12-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!--此处为希望博客在首页显示的内容-->
+
+<p>众所周知，WUT是一所为学生健康着想的大学，需要学生每日在晚8点前进行健康打卡，但是heavytiger同学经常摸鱼会忘记打卡，引发年级群中的“友好通知”，这样会让人很困扰，恰逢heavytiger同学某日逛B站时，发现一研究生学长通过python实现了自动化打卡，特研究一日，实现了自动化健康打卡。</p>
+<span id="more"></span>
+<!-- markdownlint-disable MD041 MD002-->
+
+<h2 id="故事的开始"><a href="#故事的开始" class="headerlink" title="故事的开始"></a>故事的开始</h2><p>闲逛B站时发现一个实现自动化健康打卡的视频，恰好本人亦有困扰，于是点进去研究了以下，发现恰好是我校研究生学长（世界真小，视频地址如下，请一键三连：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qg411N7vS">Python 每天自动打卡小程序_哔哩哔哩_bilibili</a>）</p>
+<p>该学长使用了<code>pyautogui</code>库模拟用户通过鼠标点击，登录微信，点击小程序进行签到，但是我的微信死活不支持一键登录，必须使用手机扫码，再加上本科生没有常年开机的电脑，通过bat实现有些不太现实，于是另辟蹊径，考虑使用python的requests库实现相同功能。</p>
+<h3 id="分析健康打卡原理"><a href="#分析健康打卡原理" class="headerlink" title="分析健康打卡原理"></a>分析健康打卡原理</h3><p>使用手机进行抓包操作也不太方便，于是考虑使用电脑进行抓包，在windows笔电上登录微信后进入打卡小程序，使用Fiddler进行抓包，伪造证书后，实现了中间人攻击，获取到了https包并成功解包。</p>
+<p><img src="image-20211209222108891.png" alt="image-20211209222108891"></p>
+<p>小程序和后台使用json进行数据传输，text使用base64编码，很好解码</p>
+<p>除了以上的几个Servlet之外，通过在github上搜轮子（轮子地址：<a target="_blank" rel="noopener" href="https://github.com/xiaozhangtongx/WHUT-JKRBTB">xiaozhangtongx/WHUT-JKRBTB: 武汉理工大学健康打卡小脚本 (github.com)</a>），了解到本校的健康打卡小程序只能在微信端解绑定后才能再次打卡。</p>
+<p><strong>具体流程如下：</strong></p>
+<ol>
+<li><p>请求``checkBind<code>接口实现登录操作，登陆成功后，返回会话id即</code>JSESSIONID`，之后的连接均通过该SessionId进行创建。</p>
+</li>
+<li><p>登录成功后，调用<code>bindUserInfo</code>接口查看绑定用户的信息，若此处没有在用户微信手机上解绑，后台应该持有一个用户微信的token导致mybatis查询不为空，导致后期的打卡<code>monitorRegister</code>接口失败</p>
+<p>也可以在fiddler中找到自己的code值，模拟手机微信登录打卡，可以但没必要，因为门槛高。</p>
+<p>（请忽视报错，不想修改截图了，啊吧啊吧）</p>
+<p><img src="image-20211209224013336.png" alt="image-20211209224013336"></p>
+</li>
+<li><p>调用<code>monitorRegister</code>接口，通过该接口上传数据，内容大致如下（PS: 是否出省份的key是<code>isLeaveChengdu</code> 不愧是你啊WUT，也就你找这种外包了）：</p>
+<p><img src="image-20211209231909197.png" alt="image-20211209231909197"></p>
+</li>
+<li><p>调用<code>cancelBind</code>接口，通过该接口传入SessionId取消绑定，否则同理，微信估计也登不上去了。</p>
+</li>
+</ol>
+<h2 id="代码简介"><a href="#代码简介" class="headerlink" title="代码简介"></a>代码简介</h2><h3 id="完整目录结构"><a href="#完整目录结构" class="headerlink" title="完整目录结构"></a>完整目录结构</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">E:\COLLEGEDATA\打卡</span><br><span class="line">│  sign.py</span><br><span class="line">│</span><br><span class="line">├─jsons</span><br><span class="line">│      user.json</span><br><span class="line">│</span><br><span class="line">├─logs</span><br><span class="line">│      days.log</span><br><span class="line">│      error.log</span><br><span class="line">│      run.log</span><br><span class="line">│</span><br><span class="line">└─test</span><br><span class="line">        api.login.checkBind.json</span><br><span class="line">        monitorRegister.json</span><br><span class="line">        signin.json</span><br><span class="line">        testJson.py</span><br><span class="line">        testlog.log</span><br><span class="line">        打卡.saz</span><br></pre></td></tr></table></figure>
+
+<p>其中重要部分包括：</p>
+<p>打卡脚本<code>sign.py</code>；</p>
+<p><code>jsons/user.json</code>用于存储用户信息（帮着把室友的也加进去了）；</p>
+<p><code>logs/*.log</code>用来存储运行记录，<code>days.log</code>在linux下重定向保存运行输出与报错信息，<code>error.log</code>用来存储可预知的报错，即按程序中的设定输出异常信息，<code>run.log</code>用来存储运行时的正常日志。</p>
+<p><strong>具体的代码不在过多介绍，就是简单的requests库调用</strong></p>
+<blockquote>
+<p><strong>可能出现的错误：</strong></p>
+<p>可能出现使用requests请求时出现异常失败的情况，原因是，可能正在科学上网，使用了某端口进行转接作为代理服务器，此时需要手动设置：</p>
+<p><code>win</code> -&gt; <code>键入Internet属性</code> -&gt; <code>点击连接</code> -&gt; <code>点击局域网设置</code> -&gt; <code>禁用代理服务器，选择自动检测设置</code></p>
+<p><img src="image-20211210000041198.png" alt="image-20211210000041198"></p>
+<p>配置成如下所示，即可使用requests库发送请求：</p>
+<p><img src="image-20211210000129630.png" alt="image-20211210000129630"></p>
+</blockquote>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf8 -*-</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机User-Agent</span></span><br><span class="line">useragentlist = [</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2.14) Gecko/20110218 AlexaToolbar/alxf-2.0 Firefox/3.6.14&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机温度</span></span><br><span class="line">temperature = [<span class="string">&quot;36\&quot;C~36.5°C&quot;</span>, <span class="string">&quot;36.5°C~36.9°C&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, sn, idCard</span>):</span></span><br><span class="line">        self.sn = sn</span><br><span class="line">        self.idCard = idCard</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseJSON</span>(<span class="params">dct</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(dct, <span class="built_in">dict</span>):</span><br><span class="line">            user = User(<span class="built_in">str</span>(dct[<span class="string">&quot;sn&quot;</span>]), <span class="built_in">str</span>(dct[<span class="string">&quot;idCard&quot;</span>])) </span><br><span class="line">            <span class="keyword">return</span> user</span><br><span class="line">        <span class="keyword">return</span> dct</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readJson</span>():</span></span><br><span class="line">    fileName = <span class="string">&#x27;jsons/user.json&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(fileName, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        userList = json.load(f)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(userList, <span class="built_in">dict</span>):</span><br><span class="line">        users = userList[<span class="string">&quot;users&quot;</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(users)):</span><br><span class="line">        users[i] = User.parseJSON(users[i])    </span><br><span class="line">    <span class="keyword">return</span> users</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeError</span>(<span class="params">logs</span>):</span></span><br><span class="line">    fileName = <span class="string">&#x27;logs/error.log&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(fileName, <span class="string">&#x27;a&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>, time.localtime()) + <span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">        f.write(logs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeLog</span>(<span class="params">logs</span>):</span></span><br><span class="line">    fileName = <span class="string">&#x27;logs/run.log&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(fileName, <span class="string">&#x27;a&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>, time.localtime()) + <span class="string">&#x27;: &#x27;</span>)</span><br><span class="line">        f.write(logs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_sessionId</span>(<span class="params">json_data</span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://zhxg.whut.edu.cn/yqtjwx/api/login/checkBind&quot;</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;https://servicewechat.com/wxa0738e54aae84423/17/page-frame.html&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Tag&quot;</span>: <span class="string">&quot;flyio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-cn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep - alive&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;zhxg.whut.edu.cn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(useragentlist)</span><br><span class="line">    r = requests.post(url=url, headers=headers, json=json_data)</span><br><span class="line">    result = json.loads(r.text)</span><br><span class="line">    sessionId = result[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;sessionId&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&quot;status&quot;</span>] != <span class="literal">True</span> :</span><br><span class="line">        <span class="comment"># 说明登录失败</span></span><br><span class="line">        writeError(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Error: 登录失败\n&quot;</span>)</span><br><span class="line">        writeError(<span class="built_in">str</span>(result) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        writeLog(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Data: 登录成功\n&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(sessionId)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_bindUserInfo</span>(<span class="params">sessionId, json_data</span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://zhxg.whut.edu.cn/yqtjwx/api/login/bindUserInfo&quot;</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;https://servicewechat.com/wxa0738e54aae84423/17/page-frame.html&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;JSESSIONID=%s&quot;</span> % (sessionId),</span><br><span class="line">        <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;*/*&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Tag&quot;</span>: <span class="string">&quot;flyio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-cn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep - alive&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;zhxg.whut.edu.cn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(useragentlist)</span><br><span class="line">    r = requests.post(url=url, headers=headers, json=json_data)</span><br><span class="line">    result = json.loads(r.text)</span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&quot;status&quot;</span>] != <span class="literal">True</span> :</span><br><span class="line">        <span class="comment"># 说明此时已在其他地方登录</span></span><br><span class="line">        writeError(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Error: 已被绑定\n&quot;</span>)</span><br><span class="line">        writeError(<span class="built_in">str</span>(result) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        writeLog(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Data: 未被绑定\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_monitorRegister</span>(<span class="params">sessionId, user_data, province, city, county, street</span>):</span></span><br><span class="line">    currentAddress = <span class="built_in">str</span>(province) + <span class="built_in">str</span>(city) + <span class="built_in">str</span>(county) + <span class="built_in">str</span>(street)</span><br><span class="line">    url = <span class="string">&quot;https://zhxg.whut.edu.cn/yqtjwx/./monitorRegister&quot;</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;https://servicewechat.com/wxa0738e54aae84423/17/page-frame.html&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;JSESSIONID=%s&quot;</span> % (sessionId),</span><br><span class="line">        <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;*/*&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Tag&quot;</span>: <span class="string">&quot;flyio&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-cn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep - alive&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;zhxg.whut.edu.cn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(useragentlist)</span><br><span class="line">    json_data = &#123;</span><br><span class="line">        <span class="string">&quot;diagnosisName&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;relationWithOwn&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;currentAddress&quot;</span>: currentAddress,</span><br><span class="line">        <span class="string">&quot;remark&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;healthInfo&quot;</span>: <span class="string">&quot;正常&quot;</span>,</span><br><span class="line">        <span class="string">&quot;isDiagnosis&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;isFever&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;isInSchool&quot;</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;isLeaveChengdu&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;isSymptom&quot;</span>: <span class="string">&quot;0&quot;</span>,</span><br><span class="line">        <span class="string">&quot;temperature&quot;</span>: random.choice(temperature),</span><br><span class="line">        <span class="string">&quot;province&quot;</span>: province,</span><br><span class="line">        <span class="string">&quot;city&quot;</span>: city,</span><br><span class="line">        <span class="string">&quot;county&quot;</span>: county</span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.post(url=url, headers=headers, json=json_data)</span><br><span class="line">    result = json.loads(r.text)</span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&quot;status&quot;</span>] != <span class="literal">True</span> :</span><br><span class="line">        <span class="comment"># 说明每日打卡失败</span></span><br><span class="line">        writeError(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(user_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Error: 打卡失败\n&quot;</span>)</span><br><span class="line">        writeError(<span class="built_in">str</span>(result) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        writeLog(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(user_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Data: 打卡成功\n&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cancelBind</span>(<span class="params">sessionId, json_data</span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://zhxg.whut.edu.cn/yqtjwx/api/login/cancelBind&quot;</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;https://servicewechat.com/wxa0738e54aae84423/17/page-frame.html&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;JSESSIONID=%s&quot;</span> % (sessionId),</span><br><span class="line">        <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep - alive&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;zhxg.whut.edu.cn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    headers[<span class="string">&#x27;User-Agent&#x27;</span>] = random.choice(useragentlist)</span><br><span class="line">    r = requests.post(url=url, headers=headers)</span><br><span class="line">    result = json.loads(r.text)</span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&quot;status&quot;</span>] != <span class="literal">True</span> :</span><br><span class="line">        <span class="comment"># 说明解绑失败</span></span><br><span class="line">        writeError(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Error: 解绑失败\n&quot;</span>)</span><br><span class="line">        writeError(<span class="built_in">str</span>(result) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        writeLog(<span class="string">&quot;StudentId: &quot;</span> + <span class="built_in">str</span>(json_data[<span class="string">&quot;sn&quot;</span>]) + <span class="string">&quot; SessionId: &quot;</span> + <span class="built_in">str</span>(sessionId) + <span class="string">&quot; Data: 解绑成功\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    users = readJson()</span><br><span class="line">    FLAG = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> u <span class="keyword">in</span> users:</span><br><span class="line">        data = &#123;<span class="string">&#x27;sn&#x27;</span>: u.sn, <span class="string">&#x27;idCard&#x27;</span>: u.idCard&#125;</span><br><span class="line">        <span class="built_in">id</span> = request_sessionId(data)</span><br><span class="line">        request_bindUserInfo(<span class="built_in">id</span>, data)</span><br><span class="line">        res = request_monitorRegister(<span class="built_in">id</span>, data, <span class="string">&quot;湖北省&quot;</span>, <span class="string">&quot;武汉市&quot;</span>, <span class="string">&quot;洪山区&quot;</span>, <span class="string">&quot;工大路&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> res == <span class="literal">False</span>:</span><br><span class="line">            <span class="comment"># 说明打卡失败</span></span><br><span class="line">            <span class="built_in">print</span>(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()) + <span class="string">&quot;: 学号为: &quot;</span> + <span class="built_in">str</span>(u.sn) + <span class="string">&quot;的用户出现错误！&quot;</span>)</span><br><span class="line">            FLAG = <span class="literal">False</span>      </span><br><span class="line">        cancelBind(<span class="built_in">id</span>, data)</span><br><span class="line">    <span class="keyword">if</span> FLAG == <span class="literal">False</span>:</span><br><span class="line">        <span class="built_in">print</span>(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()) + <span class="string">&quot;: 每日填报完成，但存在错误！&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(time.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, time.localtime()) + <span class="string">&quot;: 每日填报完成！&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="部署到服务器"><a href="#部署到服务器" class="headerlink" title="部署到服务器"></a>部署到服务器</h2><p>服务器是之前几十块买的阿里云的服务器，运行<code>CentOS 7</code>操作系统</p>
+<p>使用Xshell，Xftp等工具将文件传入到服务器中，测试完毕后，使用<code>crontab</code>设置为定时任务</p>
+<p>使用命令<code>crontab -e</code>，将使用vi打开定时任务清单，自行配置即可，使用如下语句，设定每天中午12：45分执行命令，将报错以及运行结果输出到<code>./logs/days.log</code>中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# crontab -l</span><br><span class="line">45 12 * * * cd /usr/local/src/daySign &amp;&amp; ./sign.py &gt;&gt; ./logs/days.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>多次打卡会提示打卡失败，可在<code>error.log</code>中查看：</p>
+<p><img src="image-20211210000948325.png" alt="image-20211210000948325"></p>
+<p>打卡时的响应数据会存储在<code>run.log</code>中，可以查看：</p>
+<p><img src="image-20211210001054621.png" alt="image-20211210001054621"></p>
+<p>学校的服务器凌晨运维，凌晨手动测试为啥提交不上的时候不小心把log删除了，因此上面没有打卡成功数据，成功时会在<code>run.log</code>增加一条记录<strong>打卡成功</strong></p>
+<p>若有用户在手机上登录未解绑，<code>error.log</code>中会报错，otherData中报MyBatis调Mapper中查询selectOne错误，出现问题时，自然懂得都懂。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<p>[1] <a target="_blank" rel="noopener" href="https://www.yiibai.com/linux/crontab.html">crontab命令（Linux定时任务） - Linux命令大全教程™ (yiibai.com)</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qg411N7vS">Python 每天自动打卡小程序_哔哩哔哩_bilibili</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://github.com/xiaozhangtongx/WHUT-JKRBTB">xiaozhangtongx/WHUT-JKRBTB: 武汉理工大学健康打卡小脚本 (github.com)</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+        <div>
+    
+        <hr>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文到此结束 <i class="fas fa-book-open"></i> 感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+        <div class="reward-container">
+  <div>谢谢你请我喝肥宅快乐水(๑＞ڡ＜) ☆☆☆</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatimg.jpg" alt="喵式重战 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipayimg.jpg" alt="喵式重战 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>喵式重战
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://heavytiger.github.io/articles/WUT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1/" title="WUT自动化健康打卡">https://heavytiger.github.io/articles/WUT自动化健康打卡/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/articles/python%E7%88%AC%E8%99%AB%E5%88%9D%E6%8E%A2/" rel="prev" title="python爬虫初探">
+      <i class="fa fa-chevron-left"></i> python爬虫初探
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E4%BA%8B%E7%9A%84%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">故事的开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%81%A5%E5%BA%B7%E6%89%93%E5%8D%A1%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">分析健康打卡原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">代码简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">完整目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">部署到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="喵式重战"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">喵式重战</p>
+  <div class="site-description" itemprop="description">人的一切痛苦，本质上都是对自己无能的愤怒。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/HeavyTiger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;HeavyTiger" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" title="E-Mail → http:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tzhiy.github.io/" title="https:&#x2F;&#x2F;tzhiy.github.io&#x2F;" rel="noopener" target="_blank">tzhiy's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://anthonycj.github.io/" title="https:&#x2F;&#x2F;anthonycj.github.io&#x2F;" rel="noopener" target="_blank">AnthonyCJ's Blogs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+    
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fas fa-star fa-spin"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">喵式重战</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">316k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:47</span>
+</div>
+
+<!--
+--><!--
+<a href="https://icp.gov.moe/?keyword=20180708" rel="external nofollow noreferrer" target="_blank" data-pjax-state="" style="
+    border-bottom-width: 0px;
+">萌 ICP 备 20180708 号</a>
+//-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("6/8/2021 0:0:0");       //此处修改你的建站时间，注意格式
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已经存活 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒了，地球太危险了，我好害怕，想回家呜呜呜( >﹏<。)";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/z16.model.json"},"display":{"position":"right","hOffset":0,"vOffset":-20,"width":200,"height":400},"mobile":{"show":true,"scale":0.7},"react":{"opacity":0.85},"log":false});</script></body>
+</html>
