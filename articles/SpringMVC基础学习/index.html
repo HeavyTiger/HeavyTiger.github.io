@@ -28,15 +28,15 @@
 <meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
 <meta property="og:description" content="Spring MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架，即使用了MVC架构模式的思想，将web层进行职责解耦，基于请求驱动指的就是使用请求-响应模型，框架的目的就是帮助简化开发，Spring Web MVC也是要简化日常Web开发的。 Spring MVC主要是通过前端控制器controller中的注解来完成请求处理的。前端无论是以何种方式请求，都">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/20160427094830780.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20211216223424524.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/20160427094830780.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20211216223424524.png">
 <meta property="article:published_time" content="2021-12-09T04:46:33.000Z">
 <meta property="article:modified_time" content="2021-12-16T03:13:33.000Z">
 <meta property="article:author" content="喵式重战">
 <meta property="article:tag" content="SpringMVC">
 <meta property="article:tag" content="SSM框架">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/20160427094830780.png">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/20160427094830780.png">
 
 <link rel="canonical" href="https://heavytiger.github.io/articles/SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">
 
@@ -352,7 +352,7 @@
 <li>如果jar包存在，显示无法输出，就在IDEA的项目发布中，添加lib依赖！</li>
 <li>重启Tomcat 即可解决！</li>
 </ol>
-<h2 id="SpringMVC的执行原理"><a href="#SpringMVC的执行原理" class="headerlink" title="SpringMVC的执行原理"></a>SpringMVC的执行原理</h2><p><img src="SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/20160427094830780.png" alt="SpringMVC的执行原理"></p>
+<h2 id="SpringMVC的执行原理"><a href="#SpringMVC的执行原理" class="headerlink" title="SpringMVC的执行原理"></a>SpringMVC的执行原理</h2><p><img src="20160427094830780.png" alt="SpringMVC的执行原理"></p>
 <p>(1) Http请求：客户端请求提交到DispatcherServlet。<br>(2) 寻找处理器：由DispatcherServlet控制器查询一个或多个HandlerMapping，找到处理请求的Controller。<br>(3) 调用处理器：DispatcherServlet将请求提交到Controller。<br>(4)(5)调用业务处理和返回结果：Controller调用业务逻辑处理后，返回ModelAndView。<br>(6)(7)处理视图映射并返回模型： DispatcherServlet查询一个或多个ViewResoler视图解析器，找到ModelAndView指定的视图。<br>(8) Http响应：视图负责将结果显示到客户端。</p>
 <h2 id="使用注解开发，实现HelloWorld"><a href="#使用注解开发，实现HelloWorld" class="headerlink" title="使用注解开发，实现HelloWorld"></a>使用注解开发，实现HelloWorld</h2><p><strong>导入SpringMVC依赖</strong></p>
 <p><strong>配置web.xml注册DispatcherServlet：</strong></p>
@@ -365,7 +365,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.heavytiger.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.Model;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/springMVC&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloSpringMVC</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;Hello world, this is SpringMVC!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;     <span class="comment">// return 的结果会被视图解析器解析，拼接后找到视图</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/spring&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloSpring</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;Hello world, this is Spring!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;     <span class="comment">// return 的结果会被视图解析器解析，拼接后找到视图</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/mybatis&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloMyBatis</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;Hello world, this is MyBatis!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;     <span class="comment">// return 的结果会被视图解析器解析，拼接后找到视图</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>结果：</strong></p>
-<p><img src="SpringMVC%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/image-20211216223424524.png" alt="image-20211216223424524"></p>
+<p><img src="image-20211216223424524.png" alt="image-20211216223424524"></p>
 <p>此时访问不同的网页，导入到了不同的页面中</p>
 <h2 id="RESTful-API风格"><a href="#RESTful-API风格" class="headerlink" title="RESTful API风格"></a>RESTful API风格</h2><p>REST：英文representational state transfer直译为表现层状态转移，或者表述性状态转移；Rest是web服务的一种架构风格，一种设计风格，是一种思想；同时Rest不是针对某一种编程语言的。</p>
 <h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><p>API与用户的通信协议，总是使用HTTPs协议。</p>
@@ -590,7 +590,10 @@
     <a href="/articles/Spring5%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="prev" title="Spring5基础学习">
       <i class="fa fa-chevron-left"></i> Spring5基础学习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/articles/SSM%E6%95%B4%E5%90%88%E5%BC%80%E5%8F%91/" rel="next" title="SSM整合开发">
+      SSM整合开发 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -665,7 +668,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -678,7 +681,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -730,8 +733,8 @@
 
 <div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fas fa-star fa-spin"></i>
   </span>
@@ -740,12 +743,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">369k</span>
+    <span title="站点总字数">388k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:35</span>
+    <span title="站点阅读时长">5:53</span>
 </div>
 
 <!--
