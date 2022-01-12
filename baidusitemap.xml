@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://heavytiger.github.io/articles/SpringBoot%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2022-01-12</lastmod>
+  </url>
+  <url>
     <loc>https://heavytiger.github.io/articles/SSM%E6%95%B4%E5%90%88%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2021-12-27</lastmod>
   </url>
