@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sBEHKTtAGOsW8CzuLFLKzJIeSgj5S3G_6Jhlltsm76k">
   <meta name="baidu-site-verification" content="code-2EuuuTEL7g">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -32,9 +33,10 @@
 <meta property="og:image" content="https://heavytiger.github.io/articles/SpringBoot%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/image-20220112161921050.png">
 <meta property="og:image" content="https://heavytiger.github.io/articles/SpringBoot%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/image-20220112164852346.png">
 <meta property="article:published_time" content="2022-01-12T01:46:11.000Z">
-<meta property="article:modified_time" content="2022-01-12T01:46:11.000Z">
+<meta property="article:modified_time" content="2022-01-12T14:57:31.000Z">
 <meta property="article:author" content="喵式重战">
-<meta property="article:tag" content="喵式重战,HeavyTiger,heavytiger,Blog,博客,java后端,后端,Linux,Spring,Java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Spring框架">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://heavytiger.github.io/articles/SpringBoot%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/image-20220112161714239.png">
 
@@ -224,8 +226,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-01-12 09:46:11" itemprop="dateCreated datePublished" datetime="2022-01-12T09:46:11+08:00">2022-01-12</time>
+              <time title="创建时间：2022-01-12 09:46:11 / 修改时间：22:57:31" itemprop="dateCreated datePublished" datetime="2022-01-12T09:46:11+08:00">2022-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">框架学习</span></a>
+                </span>
             </span>
 
           
@@ -384,39 +396,59 @@
 </ul>
 <ul>
 <li><p>自动配好SpringMVC</p>
-</li>
-<li><ul>
+<ul>
 <li>引入SpringMVC全套组件</li>
 <li>自动配好SpringMVC常用组件（功能）视图解析器，dispatcherServlet等</li>
 </ul>
 </li>
 <li><p>自动配好Web常见功能</p>
-</li>
-<li><ul>
+<ul>
 <li>SpringBoot帮我们配置好了所有web开发的常见场景及问题，如：字符编码乱码问题</li>
 </ul>
 </li>
 <li><p>默认的包结构</p>
+<ul>
+<li><p><strong>主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来</strong></p>
 </li>
-<li><ul>
-<li><strong>主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来</strong></li>
-<li>无需以前的包扫描配置</li>
-</ul>
+<li><p>无需以前的包扫描配置</p>
 </li>
-<li><ul>
-<li>想要改变扫描路径，<code>@SpringBootApplication(scanBasePackages=&quot;com.heavytiger&quot;)</code></li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
+<li><p>想要改变扫描路径，<code>@SpringBootApplication(scanBasePackages=&quot;com.heavytiger&quot;)</code></p>
+<ul>
 <li>或者使用 <code>@ComponentScan</code>指定扫描路径，已经写了<code>@SpringBootApplication()</code>后，不能重复使用，因为其本质使用<code>@ComponentScan</code>实现，默认扫描到该注解的包下</li>
 </ul>
-</li>
-<li><p>```java<br>@SpringBootApplication<br>// 等同于以下三句<br>@SpringBootConfiguration<br>@EnableAutoConfiguration<br>@ComponentScan(“com.heavytiger.boot”)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 各种配置拥有默认值</span><br><span class="line"></span><br><span class="line">- - 默认配置最终都是映射到某个类上，如：`MultipartProperties`</span><br><span class="line">  - 配置文件的值最终会绑定某个类上，这个类会在容器中被创建对象</span><br><span class="line"></span><br><span class="line">- 按需加载所有自动配置项</span><br><span class="line"></span><br><span class="line">- - 非常多的starter</span><br><span class="line">  - **按需加载，引入了哪些场景，该场景的自动配置才会被开启，不一定类都被加载，只有需要的时候才会被加载**</span><br><span class="line"></span><br><span class="line">- - SpringBoot所有的自动配置功能都在`spring-boot-autoconfigure`包里面</span><br><span class="line"></span><br><span class="line">- ......</span><br><span class="line"></span><br><span class="line">### 容器功能</span><br><span class="line"></span><br><span class="line">#### 组件添加</span><br><span class="line"></span><br><span class="line">##### @Configuration</span><br><span class="line"></span><br><span class="line">* 基本模式`@Configuration`，表示该类是一个配置类</span><br><span class="line">* Full模式`@Configuration(proxyBeanMethods = true)`和Lite模式`@Configuration(proxyBeanMethods = false)`</span><br><span class="line"></span><br><span class="line">建议使用方案：</span><br><span class="line"></span><br><span class="line">* 配置类中，组件之间没有依赖关系，使用Lite模式加速容器的启动，否则每次获取实例都需要判断是否存在实例</span><br><span class="line">* 配置类中，组件之间存在依赖关系，方法调用必须要得到之前的单实例组件，此时应该用Full模式保证获取到的是同一实例</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">// ########################################Configuration使用示例######################################</span><br><span class="line">/**</span><br><span class="line"> * 1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的</span><br><span class="line"> * 2、配置类本身也是一个组件，可以获取组件后调用其中的方法</span><br><span class="line"> * 3、proxyBeanMethods：代理bean的方法</span><br><span class="line"> *      Full(proxyBeanMethods = true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】</span><br><span class="line"> *      Lite(proxyBeanMethods = false)【每个@Bean方法被调用多少次返回的组件都是新创建的】</span><br><span class="line"> *      组件依赖必须使用Full模式，其他今年使用Lite模式</span><br><span class="line"> * 		Spring 5.2版本后支持</span><br><span class="line"> */</span><br><span class="line">@Configuration(proxyBeanMethods = false) //告诉SpringBoot这是一个配置类 == 配置文件</span><br><span class="line">public class MyConfig &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Full:外部无论对配置类中的这个组件注册方法调用多少次获取的都是之前注册容器中的单实例对象</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean //给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例</span><br><span class="line">    public User user01()&#123;</span><br><span class="line">        User zhangsan = new User(&quot;zhangsan&quot;, 18);</span><br><span class="line">        //user组件依赖了Pet组件</span><br><span class="line">        zhangsan.setPet(tomcatPet());</span><br><span class="line">        return zhangsan;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(&quot;tom&quot;)</span><br><span class="line">    public Pet tomcatPet()&#123;</span><br><span class="line">        return new Pet(&quot;tomcat&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ###################################@Configuration测试代码如下########################################</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan(&quot;com.heavytiger.boot&quot;)</span><br><span class="line">public class MainApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //1、返回IOC容器</span><br><span class="line">        ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);</span><br><span class="line"></span><br><span class="line">        //2、查看容器里面的组件</span><br><span class="line">        String[] names = run.getBeanDefinitionNames();</span><br><span class="line">        for (String name : names) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //3、从容器中获取组件</span><br><span class="line"></span><br><span class="line">        Pet tom01 = run.getBean(&quot;tom&quot;, Pet.class);</span><br><span class="line"></span><br><span class="line">        Pet tom02 = run.getBean(&quot;tom&quot;, Pet.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;组件：&quot;+(tom01 == tom02));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // 4、com.heavytiger.boot.config.MyConfig$$EnhancerBySpringCGLIB$$51f1e1ca@1654a892</span><br><span class="line">        MyConfig bean = run.getBean(MyConfig.class);</span><br><span class="line">        System.out.println(bean);</span><br><span class="line"></span><br><span class="line">        // 如果@Configuration(proxyBeanMethods = true)代理对象调用方法。</span><br><span class="line">        // SpringBoot总会检查这个组件是否在容器中已经存在实例</span><br><span class="line">        // 这样能够保持组件单实例</span><br><span class="line">        User user = bean.user01();</span><br><span class="line">        User user1 = bean.user01();</span><br><span class="line">        System.out.println(user == user1);</span><br><span class="line"></span><br><span class="line">        User user01 = run.getBean(&quot;user01&quot;, User.class);</span><br><span class="line">        Pet tom = run.getBean(&quot;tom&quot;, Pet.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;用户的宠物：&quot;+(user01.getPet() == tom));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">// 等同于以下三句</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.heavytiger.boot&quot;)</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li><p>各种配置拥有默认值</p>
+<ul>
+<li>默认配置最终都是映射到某个类上，如：<code>MultipartProperties</code></li>
+<li>配置文件的值最终会绑定某个类上，这个类会在容器中被创建对象</li>
 </ul>
+</li>
+<li><p>按需加载所有自动配置项</p>
+<ul>
+<li><p>非常多的starter</p>
+</li>
+<li><p><strong>按需加载，引入了哪些场景，该场景的自动配置才会被开启，不一定类都被加载，只有需要的时候才会被加载</strong></p>
+</li>
+<li><p>SpringBoot所有的自动配置功能都在<code>spring-boot-autoconfigure</code>包里面</p>
+</li>
+</ul>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件添加"><a href="#组件添加" class="headerlink" title="组件添加"></a>组件添加</h4><h5 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a>@Configuration</h5><ul>
+<li>基本模式<code>@Configuration</code>，表示该类是一个配置类</li>
+<li>Full模式<code>@Configuration(proxyBeanMethods = true)</code>和Lite模式<code>@Configuration(proxyBeanMethods = false)</code></li>
+</ul>
+<p>建议使用方案：</p>
+<ul>
+<li>配置类中，组件之间没有依赖关系，使用Lite模式加速容器的启动，否则每次获取实例都需要判断是否存在实例</li>
+<li>配置类中，组件之间存在依赖关系，方法调用必须要得到之前的单实例组件，此时应该用Full模式保证获取到的是同一实例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ########################################Configuration使用示例######################################</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1、配置类里面使用<span class="doctag">@Bean</span>标注在方法上给容器注册组件，默认也是单实例的</span></span><br><span class="line"><span class="comment"> * 2、配置类本身也是一个组件，可以获取组件后调用其中的方法</span></span><br><span class="line"><span class="comment"> * 3、proxyBeanMethods：代理bean的方法</span></span><br><span class="line"><span class="comment"> *      Full(proxyBeanMethods = true)、【保证每个<span class="doctag">@Bean</span>方法被调用多少次返回的组件都是单实例的】</span></span><br><span class="line"><span class="comment"> *      Lite(proxyBeanMethods = false)【每个<span class="doctag">@Bean</span>方法被调用多少次返回的组件都是新创建的】</span></span><br><span class="line"><span class="comment"> *      组件依赖必须使用Full模式，其他今年使用Lite模式</span></span><br><span class="line"><span class="comment"> * 		Spring 5.2版本后支持</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span> <span class="comment">//告诉SpringBoot这是一个配置类 == 配置文件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Full:外部无论对配置类中的这个组件注册方法调用多少次获取的都是之前注册容器中的单实例对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span> <span class="comment">//给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">user01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        User zhangsan = <span class="keyword">new</span> User(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        <span class="comment">//user组件依赖了Pet组件</span></span><br><span class="line">        zhangsan.setPet(tomcatPet());</span><br><span class="line">        <span class="keyword">return</span> zhangsan;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(&quot;tom&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Pet <span class="title">tomcatPet</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pet(<span class="string">&quot;tomcat&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ###################################@Configuration测试代码如下########################################</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.heavytiger.boot&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1、返回IOC容器</span></span><br><span class="line">        ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、查看容器里面的组件</span></span><br><span class="line">        String[] names = run.getBeanDefinitionNames();</span><br><span class="line">        <span class="keyword">for</span> (String name : names) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、从容器中获取组件</span></span><br><span class="line"></span><br><span class="line">        Pet tom01 = run.getBean(<span class="string">&quot;tom&quot;</span>, Pet.class);</span><br><span class="line"></span><br><span class="line">        Pet tom02 = run.getBean(<span class="string">&quot;tom&quot;</span>, Pet.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;组件：&quot;</span>+(tom01 == tom02));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4、com.heavytiger.boot.config.MyConfig$$EnhancerBySpringCGLIB$$51f1e1ca@1654a892</span></span><br><span class="line">        MyConfig bean = run.getBean(MyConfig.class);</span><br><span class="line">        System.out.println(bean);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果@Configuration(proxyBeanMethods = true)代理对象调用方法。</span></span><br><span class="line">        <span class="comment">// SpringBoot总会检查这个组件是否在容器中已经存在实例</span></span><br><span class="line">        <span class="comment">// 这样能够保持组件单实例</span></span><br><span class="line">        User user = bean.user01();</span><br><span class="line">        User user1 = bean.user01();</span><br><span class="line">        System.out.println(user == user1);</span><br><span class="line"></span><br><span class="line">        User user01 = run.getBean(<span class="string">&quot;user01&quot;</span>, User.class);</span><br><span class="line">        Pet tom = run.getBean(<span class="string">&quot;tom&quot;</span>, Pet.class);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;用户的宠物：&quot;</span>+(user01.getPet() == tom));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h5 id="Bean、-Component、-Controller、-Service、-Repository"><a href="#Bean、-Component、-Controller、-Service、-Repository" class="headerlink" title="@Bean、@Component、@Controller、@Service、@Repository"></a>@Bean、@Component、@Controller、@Service、@Repository</h5><p>和之前的SSM中一样，在类上标注注解，可以直接通过名称获取，也可以实现自动装配</p>
 <h5 id="ComponentScan、-Import"><a href="#ComponentScan、-Import" class="headerlink" title="@ComponentScan、@Import"></a>@ComponentScan、@Import</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Import</span>(&#123;User.class, DBHelper.class&#125;)</span></span><br><span class="line"><span class="comment"> *      给容器中通过无参方法自动创建出这两个类型的组件、默认组件的名字就是全类名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Import(&#123;User.class, DBHelper.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span> <span class="comment">//告诉SpringBoot这是一个配置类 == 配置文件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -465,17 +497,11 @@
 
 <p>总结：</p>
 <ul>
-<li><p>SpringBoot先加载所有的自动配置类  xxxxxAutoConfiguration</p>
-</li>
-<li><p>每个自动配置类按照条件进行生效，默认都会绑定配置文件指定的值。xxxxProperties里面拿。xxxProperties和配置文件进行了绑定</p>
-</li>
-<li><p>生效的配置类就会给容器中装配很多组件</p>
-</li>
-<li><p>只要容器中有这些组件，相当于这些功能就有了</p>
-</li>
-<li><p>定制化配置</p>
-</li>
-<li><ul>
+<li>SpringBoot先加载所有的自动配置类  xxxxxAutoConfiguration</li>
+<li>每个自动配置类按照条件进行生效，默认都会绑定配置文件指定的值。xxxxProperties里面拿。xxxProperties和配置文件进行了绑定</li>
+<li>生效的配置类就会给容器中装配很多组件</li>
+<li>只要容器中有这些组件，相当于这些功能就有了</li>
+<li>定制化配置<ul>
 <li>用户直接自己@Bean替换底层的组件</li>
 <li>用户去看这个组件是获取的配置文件什么值就去修改。</li>
 </ul>
@@ -484,45 +510,34 @@
 <p><strong>xxxxxAutoConfiguration —&gt; 组件 —&gt;</strong> <strong>xxxxProperties里面拿值 —-&gt; application.properties</strong></p>
 <h4 id="最佳实现"><a href="#最佳实现" class="headerlink" title="最佳实现"></a>最佳实现</h4><ul>
 <li><p>引入场景依赖</p>
-</li>
-<li><ul>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</a></li>
 </ul>
 </li>
 <li><p>查看自动配置了哪些（选做）</p>
-</li>
-<li><ul>
+<ul>
 <li>自己分析，引入场景对应的自动配置一般都生效了</li>
 <li>配置文件中设置<code>debug=true</code>开启自动配置报告。Negative（不生效）\Positive（生效）</li>
 </ul>
 </li>
 <li><p>是否需要修改</p>
-</li>
-<li><ul>
-<li>参照文档修改配置项</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
+<ul>
+<li>参照文档修改配置项<ul>
 <li><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties">https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties</a></li>
 <li>自己分析。xxxxProperties绑定了配置文件的哪些。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><ul>
-<li>自定义加入或者替换组件</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
+<ul>
+<li><p>自定义加入或者替换组件</p>
+<ul>
 <li>@Bean、@Component</li>
 </ul>
 </li>
-</ul>
+<li><p>自定义器  <strong>XXXXXCustomizer</strong>；</p>
 </li>
-<li><ul>
-<li>自定义器  <strong>XXXXXCustomizer</strong>；</li>
+</ul>
+<ul>
 <li>……</li>
 </ul>
 </li>
@@ -530,7 +545,6 @@
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
 <p>[1] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19K4y1L7MT">尚硅谷雷神SpringBoot2零基础入门springboot全套完整版（spring boot2）_哔哩哔哩_bilibili</a></p>
 <p>[2] <a target="_blank" rel="noopener" href="https://www.yuque.com/atguigu/springboot">SpringBoot2核心技术与响应式编程 · 语雀 (yuque.com)</a></p>
-<p>[3] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/91a2d0a1e45a">Spring MVC【入门】就这一篇！ - 简书 (jianshu.com)</a></p>
 </blockquote>
 
     </div>
@@ -588,6 +602,11 @@
 
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i> SpringBoot</a>
+              <a href="/tags/Spring%E6%A1%86%E6%9E%B6/" rel="tag"><i class="fa fa-tag"></i> Spring框架</a>
+          </div>
 
         
 
@@ -598,7 +617,10 @@
     <a href="/articles/SSM%E6%95%B4%E5%90%88%E5%BC%80%E5%8F%91/" rel="prev" title="SSM整合开发">
       <i class="fa fa-chevron-left"></i> SSM整合开发
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/articles/SpringBoot%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD/" rel="next" title="postSpringBoot核心功能">
+      postSpringBoot核心功能 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -657,7 +679,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">SpringBoot能做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">SpringBoot优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAHello-world%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">第一个Hello world程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">SpringBoot自动装配原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">SpringBoot的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBoot%E7%9A%84%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">SpringBoot的依赖管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.2.</span> <span class="nav-text">自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean%E3%80%81-Component%E3%80%81-Controller%E3%80%81-Service%E3%80%81-Repository"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">@Bean、@Component、@Controller、@Service、@Repository</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ComponentScan%E3%80%81-Import"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">@ComponentScan、@Import</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Conditional"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">@Conditional</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%BC%95%E5%85%A5"><span class="nav-number">3.1.3.</span> <span class="nav-text">xml配置文件引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">3.1.4.</span> <span class="nav-text">配置绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A-Component-ConfigurationProperties"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">方案一：@Component + @ConfigurationProperties</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A-EnableConfigurationProperties-ConfigurationProperties"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">方案二：@EnableConfigurationProperties + @ConfigurationProperties</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8"><span class="nav-number">3.2.</span> <span class="nav-text">自动配置原理入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">3.2.1.</span> <span class="nav-text">引导加载自动配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%9C%80%E5%BC%80%E5%90%AF%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">3.2.2.</span> <span class="nav-text">按需开启自动配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.3.</span> <span class="nav-text">修改默认设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.4.</span> <span class="nav-text">最佳实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">SpringBoot能做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">SpringBoot优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAHello-world%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">第一个Hello world程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">SpringBoot自动装配原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">SpringBoot的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBoot%E7%9A%84%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">3.1.1.</span> <span class="nav-text">SpringBoot的依赖管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.2.</span> <span class="nav-text">自动配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">容器功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%B7%BB%E5%8A%A0"><span class="nav-number">3.2.1.</span> <span class="nav-text">组件添加</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Configuration"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">@Configuration</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean%E3%80%81-Component%E3%80%81-Controller%E3%80%81-Service%E3%80%81-Repository"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">@Bean、@Component、@Controller、@Service、@Repository</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ComponentScan%E3%80%81-Import"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">@ComponentScan、@Import</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Conditional"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">@Conditional</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%BC%95%E5%85%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text">xml配置文件引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">3.2.3.</span> <span class="nav-text">配置绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A-Component-ConfigurationProperties"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">方案一：@Component + @ConfigurationProperties</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A-EnableConfigurationProperties-ConfigurationProperties"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">方案二：@EnableConfigurationProperties + @ConfigurationProperties</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8"><span class="nav-number">3.3.</span> <span class="nav-text">自动配置原理入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">3.3.1.</span> <span class="nav-text">引导加载自动配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%9C%80%E5%BC%80%E5%90%AF%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">3.3.2.</span> <span class="nav-text">按需开启自动配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.3.3.</span> <span class="nav-text">修改默认设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.3.4.</span> <span class="nav-text">最佳实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -673,7 +695,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -686,7 +708,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -748,12 +770,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">405k</span>
+    <span title="站点总字数">415k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:08</span>
+    <span title="站点阅读时长">6:17</span>
 </div>
 
 <!--
