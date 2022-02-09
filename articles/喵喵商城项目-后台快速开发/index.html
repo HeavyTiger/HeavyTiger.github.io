@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sBEHKTtAGOsW8CzuLFLKzJIeSgj5S3G_6Jhlltsm76k">
+  <meta name="baidu-site-verification" content="code-2EuuuTEL7g">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"heavytiger.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":18,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="人人开源是一个优秀便捷易于使用的开源项目，其中有很多便于管理系统快速开发的工具，本项目使用renren-fast搭建喵喵商城(meow-mall)的后台管理系统的后端，使用renren-fast-vue搭建喵喵商城(meow-mall)的后台管理系统的前端，使用renren-generator快速生成mvc相关的代码，减少开发任务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="喵喵商城项目_后台快速开发">
+<meta property="og:url" content="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
+<meta property="og:description" content="人人开源是一个优秀便捷易于使用的开源项目，其中有很多便于管理系统快速开发的工具，本项目使用renren-fast搭建喵喵商城(meow-mall)的后台管理系统的后端，使用renren-fast-vue搭建喵喵商城(meow-mall)的后台管理系统的前端，使用renren-generator快速生成mvc相关的代码，减少开发任务。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/image-20220207231038983.png">
+<meta property="article:published_time" content="2022-02-08T11:23:14.000Z">
+<meta property="article:modified_time" content="2022-02-09T03:08:21.000Z">
+<meta property="article:author" content="喵式重战">
+<meta property="article:tag" content="项目实战">
+<meta property="article:tag" content="快速开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/image-20220207231038983.png">
+
+<link rel="canonical" href="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>喵喵商城项目_后台快速开发 | HeavyTiger's Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+   <!--动态线条背景-->
+    <script type="text/javascript"color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+   
+   <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HeavyTiger's Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">逆水行舟</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/HeavyTiger" class="github-corner" title="喵喵喵~~~" aria-label="喵喵喵~~~" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="喵式重战">
+      <meta itemprop="description" content="人的一切痛苦，本质上都是对自己无能的愤怒。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HeavyTiger's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          喵喵商城项目_后台快速开发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-08 19:23:14" itemprop="dateCreated datePublished" datetime="2022-02-08T19:23:14+08:00">2022-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-09 11:08:21" itemprop="dateModified" datetime="2022-02-09T11:08:21+08:00">2022-02-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" itemprop="url" rel="index"><span itemprop="name">项目实战</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>25k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>23 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!--此处为希望博客在首页显示的内容-->
+
+<p><a target="_blank" rel="noopener" href="https://www.renren.io/">人人开源</a>是一个优秀便捷易于使用的开源项目，其中有很多便于管理系统快速开发的工具，本项目使用<code>renren-fast</code>搭建<code>喵喵商城(meow-mall)</code>的后台管理系统的后端，使用<code>renren-fast-vue</code>搭建<code>喵喵商城(meow-mall)</code>的后台管理系统的前端，使用<code>renren-generator</code>快速生成<code>mvc</code>相关的代码，减少开发任务。</p>
+<span id="more"></span>
+<!-- markdownlint-disable MD041 MD002-->
+
+<h2 id="快速搭建后台管理系统"><a href="#快速搭建后台管理系统" class="headerlink" title="快速搭建后台管理系统"></a>快速搭建后台管理系统</h2><p>我们使用人人开源项目<a target="_blank" rel="noopener" href="https://gitee.com/renrenio">人人开源 (gitee.com)</a>快速搭建后台管理系统，以提高开发效率</p>
+<p>后台管理系统前端：<a target="_blank" rel="noopener" href="https://gitee.com/renrenio/renren-fast-vue">renren-fast-vue: renren-fast-vue基于vue、element-ui构建开发，实现renren-fast后台管理前端功能，提供一套更优的前端解决方案。 (gitee.com)</a></p>
+<p>后台管理系统后端：<a target="_blank" rel="noopener" href="https://gitee.com/renrenio/renren-fast">renren-fast: renren-fast是一个轻量级的Spring Boot2.1快速开发平台，其设计目标是开发迅速、学习简单、轻量级、易扩展；使用Spring Boot、Shiro、MyBatis、Redis、Bootstrap、Vue2.x等框架，包含：管理员列表、角色管理、菜单管理、定时任务、参数管理、代码生成器、日志管理、云存储、API模块(APP接口开发利器)、前后端分离等。 (gitee.com)</a></p>
+<p>将两个项目<code>clone</code>到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone git@gitee.com:renrenio/renren-fast.git</span><br><span class="line"></span><br><span class="line">git clone git@gitee.com:renrenio/renren-fast-vue.git</span><br></pre></td></tr></table></figure>
+
+<p>将<code>renren-fast</code>后台放入项目中，使用主项目的<code>pom.xml</code>包含它</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.heavytiger.meowmall<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>meowmall<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>meowmall<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>聚合服务，将其他的pom文件聚合<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>meowmall-coupon<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>meowmall-member<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>meowmall-order<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>meowmall-product<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>meowmall-ware<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>renren-fast<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在数据库中导入人人开源后台管理系统所需的数据库及表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> DATABASE IF <span class="keyword">EXISTS</span> `meowmall_admin`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE `meowmall_admin` <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="string">&#x27;utf8mb4&#x27;</span>;</span><br><span class="line"></span><br><span class="line">USE `meowmall_admin`;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 菜单</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_menu` (</span><br><span class="line">  `menu_id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `parent_id` <span class="type">bigint</span> COMMENT <span class="string">&#x27;父菜单ID，一级菜单为0&#x27;</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;菜单名称&#x27;</span>,</span><br><span class="line">  `url` <span class="type">varchar</span>(<span class="number">200</span>) COMMENT <span class="string">&#x27;菜单URL&#x27;</span>,</span><br><span class="line">  `perms` <span class="type">varchar</span>(<span class="number">500</span>) COMMENT <span class="string">&#x27;授权(多个用逗号分隔，如：user:list,user:create)&#x27;</span>,</span><br><span class="line">  `type` <span class="type">int</span> COMMENT <span class="string">&#x27;类型   0：目录   1：菜单   2：按钮&#x27;</span>,</span><br><span class="line">  `icon` <span class="type">varchar</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;菜单图标&#x27;</span>,</span><br><span class="line">  `order_num` <span class="type">int</span> COMMENT <span class="string">&#x27;排序&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`menu_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;菜单管理&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 系统用户</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_user` (</span><br><span class="line">  `user_id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `username` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  `password` <span class="type">varchar</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line">  `salt` <span class="type">varchar</span>(<span class="number">20</span>) COMMENT <span class="string">&#x27;盐&#x27;</span>,</span><br><span class="line">  `email` <span class="type">varchar</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">  `mobile` <span class="type">varchar</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;手机号&#x27;</span>,</span><br><span class="line">  `status` tinyint COMMENT <span class="string">&#x27;状态  0：禁用   1：正常&#x27;</span>,</span><br><span class="line">  `create_user_id` <span class="type">bigint</span>(<span class="number">20</span>) COMMENT <span class="string">&#x27;创建者ID&#x27;</span>,</span><br><span class="line">  `create_time` datetime COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`user_id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> INDEX (`username`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;系统用户&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 系统用户Token</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_user_token` (</span><br><span class="line">  `user_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `token` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;token&#x27;</span>,</span><br><span class="line">  `expire_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;过期时间&#x27;</span>,</span><br><span class="line">  `update_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;更新时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`user_id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `token` (`token`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;系统用户Token&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 系统验证码</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_captcha` (</span><br><span class="line">  `uuid` <span class="type">char</span>(<span class="number">36</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;uuid&#x27;</span>,</span><br><span class="line">  `code` <span class="type">varchar</span>(<span class="number">6</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;验证码&#x27;</span>,</span><br><span class="line">  `expire_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;过期时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`uuid`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;系统验证码&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 角色</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_role` (</span><br><span class="line">  `role_id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `role_name` <span class="type">varchar</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;角色名称&#x27;</span>,</span><br><span class="line">  `remark` <span class="type">varchar</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;备注&#x27;</span>,</span><br><span class="line">  `create_user_id` <span class="type">bigint</span>(<span class="number">20</span>) COMMENT <span class="string">&#x27;创建者ID&#x27;</span>,</span><br><span class="line">  `create_time` datetime COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`role_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;角色&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 用户与角色对应关系</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_user_role` (</span><br><span class="line">  `id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `user_id` <span class="type">bigint</span> COMMENT <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">  `role_id` <span class="type">bigint</span> COMMENT <span class="string">&#x27;角色ID&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;用户与角色对应关系&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 角色与菜单对应关系</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_role_menu` (</span><br><span class="line">  `id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `role_id` <span class="type">bigint</span> COMMENT <span class="string">&#x27;角色ID&#x27;</span>,</span><br><span class="line">  `menu_id` <span class="type">bigint</span> COMMENT <span class="string">&#x27;菜单ID&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;角色与菜单对应关系&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 系统配置信息</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_config` (</span><br><span class="line">	`id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">	`param_key` <span class="type">varchar</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;key&#x27;</span>,</span><br><span class="line">	`param_value` <span class="type">varchar</span>(<span class="number">2000</span>) COMMENT <span class="string">&#x27;value&#x27;</span>,</span><br><span class="line">	`status` tinyint <span class="keyword">DEFAULT</span> <span class="number">1</span> COMMENT <span class="string">&#x27;状态   0：隐藏   1：显示&#x27;</span>,</span><br><span class="line">	`remark` <span class="type">varchar</span>(<span class="number">500</span>) COMMENT <span class="string">&#x27;备注&#x27;</span>,</span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY (`id`),</span><br><span class="line">	<span class="keyword">UNIQUE</span> INDEX (`param_key`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;系统配置信息表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 系统日志</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_log` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `username` <span class="type">varchar</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  `operation` <span class="type">varchar</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;用户操作&#x27;</span>,</span><br><span class="line">  `<span class="keyword">method</span>` <span class="type">varchar</span>(<span class="number">200</span>) COMMENT <span class="string">&#x27;请求方法&#x27;</span>,</span><br><span class="line">  `params` <span class="type">varchar</span>(<span class="number">5000</span>) COMMENT <span class="string">&#x27;请求参数&#x27;</span>,</span><br><span class="line">  `<span class="type">time</span>` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;执行时长(毫秒)&#x27;</span>,</span><br><span class="line">  `ip` <span class="type">varchar</span>(<span class="number">64</span>) COMMENT <span class="string">&#x27;IP地址&#x27;</span>,</span><br><span class="line">  `create_date` datetime COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;系统日志&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 文件上传</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `sys_oss` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `url` <span class="type">varchar</span>(<span class="number">200</span>) COMMENT <span class="string">&#x27;URL地址&#x27;</span>,</span><br><span class="line">  `create_date` datetime COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;文件上传&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定时任务</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `schedule_job` (</span><br><span class="line">  `job_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;任务id&#x27;</span>,</span><br><span class="line">  `bean_name` <span class="type">varchar</span>(<span class="number">200</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;spring bean名称&#x27;</span>,</span><br><span class="line">  `params` <span class="type">varchar</span>(<span class="number">2000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;参数&#x27;</span>,</span><br><span class="line">  `cron_expression` <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;cron表达式&#x27;</span>,</span><br><span class="line">  `status` tinyint(<span class="number">4</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;任务状态  0：正常  1：暂停&#x27;</span>,</span><br><span class="line">  `remark` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;备注&#x27;</span>,</span><br><span class="line">  `create_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`job_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;定时任务&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定时任务日志</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `schedule_job_log` (</span><br><span class="line">  `log_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;任务日志id&#x27;</span>,</span><br><span class="line">  `job_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;任务id&#x27;</span>,</span><br><span class="line">  `bean_name` <span class="type">varchar</span>(<span class="number">200</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;spring bean名称&#x27;</span>,</span><br><span class="line">  `params` <span class="type">varchar</span>(<span class="number">2000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;参数&#x27;</span>,</span><br><span class="line">  `status` tinyint(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;任务状态    0：成功    1：失败&#x27;</span>,</span><br><span class="line">  `error` <span class="type">varchar</span>(<span class="number">2000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;失败信息&#x27;</span>,</span><br><span class="line">  `times` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;耗时(单位：毫秒)&#x27;</span>,</span><br><span class="line">  `create_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`log_id`),</span><br><span class="line">  KEY `job_id` (`job_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;定时任务日志&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 用户表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tb_user` (</span><br><span class="line">  `user_id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `username` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  `mobile` <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;手机号&#x27;</span>,</span><br><span class="line">  `password` <span class="type">varchar</span>(<span class="number">64</span>) COMMENT <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line">  `create_time` datetime COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`user_id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> INDEX (`username`)</span><br><span class="line">) ENGINE<span class="operator">=</span>`InnoDB` <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;用户&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 初始数据 </span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_user` (`user_id`, `username`, `password`, `salt`, `email`, `mobile`, `status`, `create_user_id`, `create_time`) <span class="keyword">VALUES</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d&#x27;</span>, <span class="string">&#x27;YzcmCZNvbXocrsz9dm8e&#x27;</span>, <span class="string">&#x27;root@renren.io&#x27;</span>, <span class="string">&#x27;13612345678&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2016-11-11 11:11:11&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">0</span>, <span class="string">&#x27;系统管理&#x27;</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>, <span class="number">0</span>, <span class="string">&#x27;system&#x27;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="number">1</span>, <span class="string">&#x27;管理员列表&#x27;</span>, <span class="string">&#x27;sys/user&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">1</span>, <span class="string">&#x27;admin&#x27;</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="number">1</span>, <span class="string">&#x27;角色管理&#x27;</span>, <span class="string">&#x27;sys/role&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">1</span>, <span class="string">&#x27;role&#x27;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="number">1</span>, <span class="string">&#x27;菜单管理&#x27;</span>, <span class="string">&#x27;sys/menu&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">1</span>, <span class="string">&#x27;menu&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">5</span>, <span class="number">1</span>, <span class="string">&#x27;SQL监控&#x27;</span>, <span class="string">&#x27;http://localhost:8080/renren-fast/druid/sql.html&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">1</span>, <span class="string">&#x27;sql&#x27;</span>, <span class="number">4</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">6</span>, <span class="number">1</span>, <span class="string">&#x27;定时任务&#x27;</span>, <span class="string">&#x27;job/schedule&#x27;</span>, <span class="keyword">NULL</span>, <span class="number">1</span>, <span class="string">&#x27;job&#x27;</span>, <span class="number">5</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">7</span>, <span class="number">6</span>, <span class="string">&#x27;查看&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:list,sys:schedule:info&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">8</span>, <span class="number">6</span>, <span class="string">&#x27;新增&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:save&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">9</span>, <span class="number">6</span>, <span class="string">&#x27;修改&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:update&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">10</span>, <span class="number">6</span>, <span class="string">&#x27;删除&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:delete&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">11</span>, <span class="number">6</span>, <span class="string">&#x27;暂停&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:pause&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">12</span>, <span class="number">6</span>, <span class="string">&#x27;恢复&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:resume&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">13</span>, <span class="number">6</span>, <span class="string">&#x27;立即执行&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:run&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">14</span>, <span class="number">6</span>, <span class="string">&#x27;日志列表&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:schedule:log&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">15</span>, <span class="number">2</span>, <span class="string">&#x27;查看&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:user:list,sys:user:info&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">16</span>, <span class="number">2</span>, <span class="string">&#x27;新增&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:user:save,sys:role:select&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">17</span>, <span class="number">2</span>, <span class="string">&#x27;修改&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:user:update,sys:role:select&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">18</span>, <span class="number">2</span>, <span class="string">&#x27;删除&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:user:delete&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">19</span>, <span class="number">3</span>, <span class="string">&#x27;查看&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:role:list,sys:role:info&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">20</span>, <span class="number">3</span>, <span class="string">&#x27;新增&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:role:save,sys:menu:list&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">21</span>, <span class="number">3</span>, <span class="string">&#x27;修改&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:role:update,sys:menu:list&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">22</span>, <span class="number">3</span>, <span class="string">&#x27;删除&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:role:delete&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">23</span>, <span class="number">4</span>, <span class="string">&#x27;查看&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:menu:list,sys:menu:info&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">24</span>, <span class="number">4</span>, <span class="string">&#x27;新增&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:menu:save,sys:menu:select&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">25</span>, <span class="number">4</span>, <span class="string">&#x27;修改&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:menu:update,sys:menu:select&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">26</span>, <span class="number">4</span>, <span class="string">&#x27;删除&#x27;</span>, <span class="keyword">NULL</span>, <span class="string">&#x27;sys:menu:delete&#x27;</span>, <span class="number">2</span>, <span class="keyword">NULL</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">27</span>, <span class="number">1</span>, <span class="string">&#x27;参数管理&#x27;</span>, <span class="string">&#x27;sys/config&#x27;</span>, <span class="string">&#x27;sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;config&#x27;</span>, <span class="number">6</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">29</span>, <span class="number">1</span>, <span class="string">&#x27;系统日志&#x27;</span>, <span class="string">&#x27;sys/log&#x27;</span>, <span class="string">&#x27;sys:log:list&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;log&#x27;</span>, <span class="number">7</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) <span class="keyword">VALUES</span> (<span class="number">30</span>, <span class="number">1</span>, <span class="string">&#x27;文件上传&#x27;</span>, <span class="string">&#x27;oss/oss&#x27;</span>, <span class="string">&#x27;sys:oss:all&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;oss&#x27;</span>, <span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `sys_config` (`param_key`, `param_value`, `status`, `remark`) <span class="keyword">VALUES</span> (<span class="string">&#x27;CLOUD_STORAGE_CONFIG_KEY&#x27;</span>, <span class="string">&#x27;&#123;\&quot;aliyunAccessKeyId\&quot;:\&quot;\&quot;,\&quot;aliyunAccessKeySecret\&quot;:\&quot;\&quot;,\&quot;aliyunBucketName\&quot;:\&quot;\&quot;,\&quot;aliyunDomain\&quot;:\&quot;\&quot;,\&quot;aliyunEndPoint\&quot;:\&quot;\&quot;,\&quot;aliyunPrefix\&quot;:\&quot;\&quot;,\&quot;qcloudBucketName\&quot;:\&quot;\&quot;,\&quot;qcloudDomain\&quot;:\&quot;\&quot;,\&quot;qcloudPrefix\&quot;:\&quot;\&quot;,\&quot;qcloudSecretId\&quot;:\&quot;\&quot;,\&quot;qcloudSecretKey\&quot;:\&quot;\&quot;,\&quot;qiniuAccessKey\&quot;:\&quot;NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\&quot;,\&quot;qiniuBucketName\&quot;:\&quot;ios-app\&quot;,\&quot;qiniuDomain\&quot;:\&quot;http://7xqbwh.dl1.z0.glb.clouddn.com\&quot;,\&quot;qiniuPrefix\&quot;:\&quot;upload\&quot;,\&quot;qiniuSecretKey\&quot;:\&quot;uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\&quot;,\&quot;type\&quot;:1&#125;&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;云存储配置信息&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `schedule_job` (`bean_name`, `params`, `cron_expression`, `status`, `remark`, `create_time`) <span class="keyword">VALUES</span> (<span class="string">&#x27;testTask&#x27;</span>, <span class="string">&#x27;renren&#x27;</span>, <span class="string">&#x27;0 0/30 * * * ?&#x27;</span>, <span class="string">&#x27;0&#x27;</span>, <span class="string">&#x27;参数测试&#x27;</span>, now());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 账号：15327618268  密码：admin</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `tb_user` (`username`, `mobile`, `password`, `create_time`) <span class="keyword">VALUES</span> (<span class="string">&#x27;mark&#x27;</span>, <span class="string">&#x27;15327618268&#x27;</span>, <span class="string">&#x27;8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918&#x27;</span>, <span class="string">&#x27;2022-02-01 20:47:41&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--  quartz自带表结构</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_JOB_DETAILS(</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">DESCRIPTION <span class="type">VARCHAR</span>(<span class="number">250</span>) <span class="keyword">NULL</span>,</span><br><span class="line">JOB_CLASS_NAME <span class="type">VARCHAR</span>(<span class="number">250</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">IS_DURABLE <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">IS_NONCONCURRENT <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">IS_UPDATE_DATA <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">REQUESTS_RECOVERY <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_DATA <span class="type">BLOB</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,JOB_NAME,JOB_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_TRIGGERS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">DESCRIPTION <span class="type">VARCHAR</span>(<span class="number">250</span>) <span class="keyword">NULL</span>,</span><br><span class="line">NEXT_FIRE_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NULL</span>,</span><br><span class="line">PREV_FIRE_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NULL</span>,</span><br><span class="line">PRIORITY <span class="type">INTEGER</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_STATE <span class="type">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_TYPE <span class="type">VARCHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">START_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">END_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NULL</span>,</span><br><span class="line">CALENDAR_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NULL</span>,</span><br><span class="line">MISFIRE_INSTR <span class="type">SMALLINT</span>(<span class="number">2</span>) <span class="keyword">NULL</span>,</span><br><span class="line">JOB_DATA <span class="type">BLOB</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (SCHED_NAME,JOB_NAME,JOB_GROUP)</span><br><span class="line"><span class="keyword">REFERENCES</span> QRTZ_JOB_DETAILS(SCHED_NAME,JOB_NAME,JOB_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_SIMPLE_TRIGGERS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">REPEAT_COUNT <span class="type">BIGINT</span>(<span class="number">7</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">REPEAT_INTERVAL <span class="type">BIGINT</span>(<span class="number">12</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TIMES_TRIGGERED <span class="type">BIGINT</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)</span><br><span class="line"><span class="keyword">REFERENCES</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_CRON_TRIGGERS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">CRON_EXPRESSION <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TIME_ZONE_ID <span class="type">VARCHAR</span>(<span class="number">80</span>),</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)</span><br><span class="line"><span class="keyword">REFERENCES</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_SIMPROP_TRIGGERS</span><br><span class="line">  (          </span><br><span class="line">    SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    STR_PROP_1 <span class="type">VARCHAR</span>(<span class="number">512</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    STR_PROP_2 <span class="type">VARCHAR</span>(<span class="number">512</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    STR_PROP_3 <span class="type">VARCHAR</span>(<span class="number">512</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    INT_PROP_1 <span class="type">INT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    INT_PROP_2 <span class="type">INT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LONG_PROP_1 <span class="type">BIGINT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    LONG_PROP_2 <span class="type">BIGINT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    DEC_PROP_1 <span class="type">NUMERIC</span>(<span class="number">13</span>,<span class="number">4</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    DEC_PROP_2 <span class="type">NUMERIC</span>(<span class="number">13</span>,<span class="number">4</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    BOOL_PROP_1 <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    BOOL_PROP_2 <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) </span><br><span class="line">    <span class="keyword">REFERENCES</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_BLOB_TRIGGERS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">BLOB_DATA <span class="type">BLOB</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP),</span><br><span class="line">INDEX (SCHED_NAME,TRIGGER_NAME, TRIGGER_GROUP),</span><br><span class="line"><span class="keyword">FOREIGN</span> KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)</span><br><span class="line"><span class="keyword">REFERENCES</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_CALENDARS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">CALENDAR_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">CALENDAR <span class="type">BLOB</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,CALENDAR_NAME))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_PAUSED_TRIGGER_GRPS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,TRIGGER_GROUP))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_FIRED_TRIGGERS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">ENTRY_ID <span class="type">VARCHAR</span>(<span class="number">95</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">TRIGGER_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">INSTANCE_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">FIRED_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">SCHED_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">PRIORITY <span class="type">INTEGER</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">STATE <span class="type">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">JOB_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NULL</span>,</span><br><span class="line">JOB_GROUP <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NULL</span>,</span><br><span class="line">IS_NONCONCURRENT <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NULL</span>,</span><br><span class="line">REQUESTS_RECOVERY <span class="type">VARCHAR</span>(<span class="number">1</span>) <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,ENTRY_ID))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_SCHEDULER_STATE (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">INSTANCE_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LAST_CHECKIN_TIME <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">CHECKIN_INTERVAL <span class="type">BIGINT</span>(<span class="number">13</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,INSTANCE_NAME))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> QRTZ_LOCKS (</span><br><span class="line">SCHED_NAME <span class="type">VARCHAR</span>(<span class="number">120</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">LOCK_NAME <span class="type">VARCHAR</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (SCHED_NAME,LOCK_NAME))</span><br><span class="line">ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_J_REQ_RECOVERY <span class="keyword">ON</span> QRTZ_JOB_DETAILS(SCHED_NAME,REQUESTS_RECOVERY);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_J_GRP <span class="keyword">ON</span> QRTZ_JOB_DETAILS(SCHED_NAME,JOB_GROUP);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_J <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_JG <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,JOB_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_C <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,CALENDAR_NAME);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_G <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_STATE <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_STATE);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_N_STATE <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,TRIGGER_STATE);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_N_G_STATE <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_GROUP,TRIGGER_STATE);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_NEXT_FIRE_TIME <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,NEXT_FIRE_TIME);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_NFT_ST <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_STATE,NEXT_FIRE_TIME);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_NFT_MISFIRE <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_NFT_ST_MISFIRE <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_STATE);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_T_NFT_ST_MISFIRE_GRP <span class="keyword">ON</span> QRTZ_TRIGGERS(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_GROUP,TRIGGER_STATE);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_TRIG_INST_NAME <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,INSTANCE_NAME);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_INST_JOB_REQ_RCVRY <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,INSTANCE_NAME,REQUESTS_RECOVERY);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_J_G <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_JG <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_T_G <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);</span><br><span class="line"><span class="keyword">CREATE</span> INDEX IDX_QRTZ_FT_TG <span class="keyword">ON</span> QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);</span><br></pre></td></tr></table></figure>
+
+<p>前端使用<code>npm install</code>下载所需的插件，之后使用<code>npm run dev</code>命令启动前端，当然后台和前台的api调用路径要填写正确。</p>
+<h2 id="使用renren-generator自动生成mvc代码"><a href="#使用renren-generator自动生成mvc代码" class="headerlink" title="使用renren-generator自动生成mvc代码"></a>使用renren-generator自动生成mvc代码</h2><p>使用<code>git clone</code>获得所需的项目文件，将项目<code>renren-generator</code>导入到<code>meow-mall</code>项目中，修改此项目中的<code>application.yml</code>文件和<code>generator.properties</code>文件，配置需要生成的微服务模块的相关内容</p>
+<p><strong>application.yml</strong></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mysql</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">    <span class="comment">#MySQL配置</span></span><br><span class="line">    <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.205.200:3306/meowmall_pms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">jackson:</span></span><br><span class="line">    <span class="attr">time-zone:</span> <span class="string">GMT+8</span></span><br><span class="line">    <span class="attr">date-format:</span> <span class="string">yyyy-MM-dd</span> <span class="string">HH:mm:ss</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> <span class="string">classpath:/static/,classpath:/views/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">mapperLocations:</span> <span class="string">classpath:mapper/**/*.xml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">pagehelper:</span></span><br><span class="line">  <span class="attr">reasonable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">supportMethodsArguments:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">params:</span> <span class="string">count=countSql</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定数据库，可选值有【mysql、oracle、sqlserver、postgresql、mongodb】</span></span><br><span class="line"><span class="attr">renren:</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">mysql</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>generator.properties</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mainPath</span>=<span class="string">com.heavytiger</span></span><br><span class="line"><span class="comment"># 包名</span></span><br><span class="line"><span class="attr">package</span>=<span class="string">com.heavytiger.meowmall</span></span><br><span class="line"><span class="comment"># 模块名</span></span><br><span class="line"><span class="attr">moduleName</span>=<span class="string">product</span></span><br><span class="line"><span class="comment"># 作者名称，javadoc注释</span></span><br><span class="line"><span class="attr">author</span>=<span class="string">heavytiger</span></span><br><span class="line"><span class="comment"># Email</span></span><br><span class="line"><span class="attr">email</span>=<span class="string">462857080@qq.com</span></span><br><span class="line"><span class="comment"># 设置前缀，设置后，对数据库中的表转换的实体类将不包含前缀</span></span><br><span class="line"><span class="attr">tablePrefix</span>=<span class="string">pms_</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># 配置相关的类型转换</span></span><br><span class="line"><span class="attr">tinyint</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">smallint</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">mediumint</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">int</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">integer</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">bigint</span>=<span class="string">Long</span></span><br><span class="line"><span class="attr">float</span>=<span class="string">Float</span></span><br><span class="line"><span class="attr">double</span>=<span class="string">Double</span></span><br><span class="line"><span class="attr">decimal</span>=<span class="string">BigDecimal</span></span><br><span class="line"><span class="attr">bit</span>=<span class="string">Boolean</span></span><br><span class="line"></span><br><span class="line"><span class="attr">char</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">varchar</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">tinytext</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">text</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">mediumtext</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">longtext</span>=<span class="string">String</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">date</span>=<span class="string">Date</span></span><br><span class="line"><span class="attr">datetime</span>=<span class="string">Date</span></span><br><span class="line"><span class="attr">timestamp</span>=<span class="string">Date</span></span><br><span class="line"></span><br><span class="line"><span class="attr">NUMBER</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">INT</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">INTEGER</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">BINARY_INTEGER</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">LONG</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">FLOAT</span>=<span class="string">Float</span></span><br><span class="line"><span class="attr">BINARY_FLOAT</span>=<span class="string">Float</span></span><br><span class="line"><span class="attr">DOUBLE</span>=<span class="string">Double</span></span><br><span class="line"><span class="attr">BINARY_DOUBLE</span>=<span class="string">Double</span></span><br><span class="line"><span class="attr">DECIMAL</span>=<span class="string">BigDecimal</span></span><br><span class="line"><span class="attr">CHAR</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">VARCHAR</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">VARCHAR2</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">NVARCHAR</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">NVARCHAR2</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">CLOB</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">BLOB</span>=<span class="string">String</span></span><br><span class="line"><span class="attr">DATE</span>=<span class="string">Date</span></span><br><span class="line"><span class="attr">DATETIME</span>=<span class="string">Date</span></span><br><span class="line"><span class="attr">TIMESTAMP</span>=<span class="string">Date</span></span><br><span class="line"><span class="meta">TIMESTAMP(6)</span>=<span class="string">Date</span></span><br><span class="line"></span><br><span class="line"><span class="attr">int8</span>=<span class="string">Long</span></span><br><span class="line"><span class="attr">int4</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">int2</span>=<span class="string">Integer</span></span><br><span class="line"><span class="attr">numeric</span>=<span class="string">BigDecimal</span></span><br><span class="line"></span><br><span class="line"><span class="attr">nvarchar</span>=<span class="string">String</span></span><br></pre></td></tr></table></figure>
+
+<p>该项目通过模板引擎生成mvc代码，由于人人开源项目使用<code>shiro</code>进行验证，而本项目使用<code>Spring Security</code>进行身份验证，因此需要将模板引擎中controller层代码中的相关注解注释掉。</p>
+<blockquote>
+<p>注释renren-generator\src\main\resources\template/Controller中所有的</p>
+<p><code>@RequiresPermissions</code></p>
+<p><code>import org.apache.shiro.authz.annotation.RequiresPermissions;</code><br>运行<code>RenrenApplication</code>。访问<code>http://localhost:80</code>进入生成引擎，勾选所有表点击生成代码，下载代码后在文件管理器中将代码<code>copy</code>到微服务项目的路径下。</p>
+</blockquote>
+<p><img src="image-20220207231038983.png" alt="image-20220207231038983"></p>
+<p>新建一个<code>meowmall-common</code>项目，将该项目作为所有微服务的父项目，在这些微服务中依赖该项目</p>
+<p>该项目<code>pom.xml</code>的配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>meowmall<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.heavytiger.meowmall<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>meowmall-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>每一个微服务公共的依赖，bean，工具类等等<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>11<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>11<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatisPLUS--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--简化实体类，用@Data代替getset方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- httpcomponent包https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httpcore<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.4.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-lang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在其他微服务项目的<code>pom.xml</code>下加入下面内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.heavytiger.meowmall<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>meowmall-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>将<code>renren-fast</code>的<code>utils</code>包下的<code>Query</code>和<code>PageUtils</code>、<code>R</code>、<code>Constant</code>复制到<code>common</code>项目的<code>java/com.heavytiger.common.utils</code>下，总之哪里出现报错就去<code>renren-fast</code>项目的<code>common</code>文件夹下寻找，都可以找到解决方案，如果是官方库，就使用maven导入即可。</p>
+<p>全部的mvc导入之后，进行单元测试，单元测试使用<code>mybatis-plus</code>进行测试，因此需要解决相关的配置问题。</p>
+<p>在每一个微服务中都新建<code>application.yml</code>配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置数据源</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.205.200:3306/meowmall_sms?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line"><span class="comment"># 配置mybatis-plus</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="comment"># 配置mapper.xml文件的位置</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath*:/mapper/**/*.xml</span></span><br><span class="line">  <span class="comment"># 配置主键自动自增</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span></span><br><span class="line"><span class="comment"># 配置端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7000</span></span><br></pre></td></tr></table></figure>
+
+<p>其中每一个微服务的端口号都以1000的倍数开放，以便之后进行集群的相关配置，譬如可以使用<code>7001, 7002, 7003</code>等作为相同服务的服务端口</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<p>[1] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1np4y1C7Yf">Java项目《谷粒商城》Java架构师 | 微服务 | 大型电商项目_哔哩哔哩_bilibili</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/unique_perfect/article/details/111392634">从前慢-谷粒商城篇章1_unique_perfect的博客-CSDN博客_从前慢 谷粒商城</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+        <div>
+    
+        <hr>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文到此结束 <i class="fas fa-book-open"></i> 感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+        <div class="reward-container">
+  <div>谢谢你请我喝肥宅快乐水(๑＞ڡ＜) ☆☆☆</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatimg.jpg" alt="喵式重战 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipayimg.jpg" alt="喵式重战 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>喵式重战
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://heavytiger.github.io/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%90%8E%E5%8F%B0%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/" title="喵喵商城项目_后台快速开发">https://heavytiger.github.io/articles/喵喵商城项目-后台快速开发/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 项目实战</a>
+              <a href="/tags/%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i> 快速开发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE_%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="prev" title="喵喵商城项目_环境搭建">
+      <i class="fa fa-chevron-left"></i> 喵喵商城项目_环境搭建
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%88%86%E5%B8%83%E5%BC%8F%E7%BB%84%E4%BB%B6%E5%88%9D%E6%8E%A2/" rel="next" title="喵喵商城项目_分布式组件初探">
+      喵喵商城项目_分布式组件初探 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">快速搭建后台管理系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8renren-generator%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90mvc%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">使用renren-generator自动生成mvc代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="喵式重战"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">喵式重战</p>
+  <div class="site-description" itemprop="description">人的一切痛苦，本质上都是对自己无能的愤怒。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/HeavyTiger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;HeavyTiger" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" title="E-Mail → http:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;o8fGzcTAy8bNxM7KwszjxczbzsLKz43AzM4" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tzhiy.github.io/" title="https:&#x2F;&#x2F;tzhiy.github.io&#x2F;" rel="noopener" target="_blank">tzhiy's Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://anthonycj.github.io/" title="https:&#x2F;&#x2F;anthonycj.github.io&#x2F;" rel="noopener" target="_blank">AnthonyCJ's Blogs</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+    
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fas fa-star fa-spin"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">喵式重战</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">591k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:57</span>
+</div>
+
+<!--
+--><!--
+<a href="https://icp.gov.moe/?keyword=20180708" rel="external nofollow noreferrer" target="_blank" data-pjax-state="" style="
+    border-bottom-width: 0px;
+">萌 ICP 备 20180708 号</a>
+//-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("6/8/2021 0:0:0");       //此处修改你的建站时间，注意格式
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已经存活 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒了，地球太危险了，我好害怕，想回家呜呜呜( >﹏<。)";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/z16.model.json"},"display":{"position":"right","hOffset":0,"vOffset":-20,"width":200,"height":400},"mobile":{"show":true,"scale":0.7},"react":{"opacity":0.85},"log":false});</script></body>
+</html>
