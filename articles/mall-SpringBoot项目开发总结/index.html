@@ -29,44 +29,44 @@
 <meta property="og:site_name" content="HeavyTiger&#39;s Blogs">
 <meta property="og:description" content="之前使用SSM框架搭建过一个商城项目，但是该项目的全部技术栈都局限在了增删改查操作，虽然涉及到了数据库表的各种设计以及各种交互，但是仍然不能满足当下流行技术栈练手的能力，因此尝试将SSM项目转为SpringBoot项目，并且在其原有的基础上增加Redis，RabbitMQ中间件，增加秒杀商品的功能，现记录如下。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211211657587.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211214308908.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211221041301.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220219141106992.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220220095508459.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220218195919400.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164150457.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164215253.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164240828.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164342405.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164453186.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164624889.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164742233.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164829449.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164841464.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164918514.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227165453713.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223105990.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223405920.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223321782.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090027111.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090051415.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090551454.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093227630.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093437091.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093727229.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093816365.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093927977.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094053172.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094241264.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302110659354.png">
-<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302112214600.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211211657587.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211214308908.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211221041301.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220219141106992.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220220095508459.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220218195919400.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164150457.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164215253.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164240828.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164342405.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164453186.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164624889.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164742233.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164829449.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164841464.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164918514.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227165453713.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223105990.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223405920.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223321782.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090027111.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090051415.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090551454.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093227630.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093437091.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093727229.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093816365.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093927977.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094053172.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094241264.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302110659354.png">
+<meta property="og:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302112214600.png">
 <meta property="article:published_time" content="2022-02-11T08:28:09.000Z">
-<meta property="article:modified_time" content="2022-03-02T06:20:23.542Z">
+<meta property="article:modified_time" content="2022-03-02T06:28:28.835Z">
 <meta property="article:author" content="喵式重战">
 <meta property="article:tag" content="喵式重战,HeavyTiger,heavytiger,Blog,博客,java后端,后端,Linux,Spring,Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211211657587.png">
+<meta name="twitter:image" content="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211211657587.png">
 
 <link rel="canonical" href="https://heavytiger.github.io/articles/mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
 
@@ -262,7 +262,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-02 14:20:23" itemprop="dateModified" datetime="2022-03-02T14:20:23+08:00">2022-03-02</time>
+                <time title="修改时间：2022-03-02 14:28:28" itemprop="dateModified" datetime="2022-03-02T14:28:28+08:00">2022-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,7 +315,7 @@
 <h2 id="SSM项目转为SpringBoot项目"><a href="#SSM项目转为SpringBoot项目" class="headerlink" title="SSM项目转为SpringBoot项目"></a>SSM项目转为SpringBoot项目</h2><p>原来的SSM项目可以见<a href="https://heavytiger.github.io/articles/SSM%E6%95%B4%E5%90%88%E5%BC%80%E5%8F%91/#more">SSM整合开发 | HeavyTiger’s Blogs</a>项目总结。该项目以增强自己对<code>Spring、SpringMVC、MyBatis</code>的掌握为目的进行开发，项目地址如下：<a target="_blank" rel="noopener" href="https://github.com/HeavyTiger/mall">HeavyTiger/mall: 使用ssm+vue框架实现的商城系统 (github.com)</a>，前端项目为室友使用<code>Vue.js</code>框架开发，项目地址如下：<a target="_blank" rel="noopener" href="https://github.com/tzhiy/mall_FE">tzhiy/mall_FE: 商城系统的前端部分 (github.com)</a></p>
 <p>现在，为了更便捷地进行迭代，添加更多功能模块，将项目转为<code>SpringBoot</code>进行开发(称以下所有原<code>mall</code>项目为<code>mall_SSM</code>，称迭代的<code>SpringBoot</code>项目为<code>mall_SpringBoot</code>)。</p>
 <p>在<code>mall_SSM</code>项目中，项目的各种类如图所示：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211211657587.png" alt="image-20220211211657587"></p>
+<p><img src="image-20220211211657587.png" alt="image-20220211211657587"></p>
 <p>其中<code>controller</code>，<code>interceptor</code>，<code>mapper</code>，<code>pojo</code>，<code>service</code>，<code>util</code>为项目的相关业务逻辑，不过多介绍，<code>resources/com/mall/mapper/*.xml</code>为<code>mybatis</code>的相关<code>SQL</code>语句，也不再赘述，这些内容都是可以直接添加到<code>mall_SpringBoot</code>项目中的，之后在修改完包路径后，即可全部添加到新的项目中。</p>
 <p><strong>故只用对<code>resources/conf</code>的相关内容进行迁移修改，在<code>SpringBoot</code>中使用<code>application.yml / application.properties</code>以及<code>config</code>配置类进行替代即可</strong></p>
 <h3 id="配置log4j2实现日志模块"><a href="#配置log4j2实现日志模块" class="headerlink" title="配置log4j2实现日志模块"></a>配置log4j2实现日志模块</h3><p>首先我们使用<code>log4j2</code>作为日志的实现，由于之前出现了<code>log4j2</code>漏洞，因此要求将该依赖<code>spring-boot-starter-log4j2</code>的版本修改为：<code>2.6.2</code>，该版本使用了<code>2.17.1</code>版本的<code>log4j</code>，修复了存在的漏洞。</p>
@@ -332,7 +332,7 @@
 
 <p>若不进行配置，则会使用默认配置，仍能直接使用。</p>
 <p>配置完成后，<code>log4j2</code>的日志模块测试无误：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211214308908.png" alt="image-20220211214308908"></p>
+<p><img src="image-20220211214308908.png" alt="image-20220211214308908"></p>
 <h3 id="配置数据源、连接池、MyBatis"><a href="#配置数据源、连接池、MyBatis" class="headerlink" title="配置数据源、连接池、MyBatis"></a>配置数据源、连接池、MyBatis</h3><p><strong>1. 导入相关依赖</strong></p>
 <p>由于实现分页功能时我使用了<code>pagehelper</code>，因此需要导入依赖，但是若<code>SpringBoot</code>的版本高于<code>2.6.X</code>，使用低于<code>1.4.1</code>的版本会报错出现循环依赖，由于选择<code>Spring Boot 2.6.3</code>版本，因此导入<code>1.4.1</code>版本。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--MyBatis依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--MySQL驱动依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.28<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Druid数据源--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- pagehelper分页依赖，使用低版本会出现循环依赖问题，至少为1.4.1--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -372,7 +372,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if value set == get true</span><br><span class="line">hash3 : [1, 2, 3, abc]</span><br><span class="line">hash2 : 123</span><br><span class="line">hash1 : value1</span><br></pre></td></tr></table></figure>
 
 <p>redis中数据如下：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220211221041301.png" alt="image-20220211221041301"></p>
+<p><img src="image-20220211221041301.png" alt="image-20220211221041301"></p>
 <p>可以看到，集群中的数据能被正常获取到。</p>
 <blockquote>
 <p><strong>注意事项：</strong></p>
@@ -428,7 +428,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6379/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6380/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6381/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6389/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6390/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=6391/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16379/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16380/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16381/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16389/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16390/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --add-port=16391/tcp --permanent</span><br><span class="line">success</span><br><span class="line">[root@localhost redis]# firewall-cmd --zone=public --list-ports</span><br><span class="line">6379/tcp 6380/tcp 6381/tcp 6389/tcp 6390/tcp 6391/tcp 16391/tcp 16379/tcp 16380/tcp 16381/tcp 16389/tcp 16390/tcp</span><br><span class="line">[root@localhost redis]# firewall-cmd --reload</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
 
 <p>再次测试，即可在外网正常访问</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220219141106992.png" alt="image-20220219141106992"></p>
+<p><img src="image-20220219141106992.png" alt="image-20220219141106992"></p>
 <p><strong>6. 测试是否可以正常连接到<code>redis</code>集群</strong></p>
 <p>多次尝试，并检查端口，发现所有涉及的端口均可以访问，但是在SpringBoot中尝试了一整天仍然无法连接到redis数据库，但是阿里云服务器上同样方式部署的服务就可以正常连接，无果。最后考虑到lua脚本无法自动切换连接的端口，因此更换方式采用连接docker中部署的单redis</p>
 <blockquote>
@@ -441,7 +441,7 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  单机redis配置</span></span><br><span class="line"><span class="attr">redis:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.205</span><span class="number">.200</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">  <span class="attr">database:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">6o5FLS9bSJmdTGlyqJWxiEGf56vE1orO</span></span><br><span class="line">  <span class="comment"># Redis连接池设置</span></span><br><span class="line">  <span class="attr">lettuce:</span></span><br><span class="line">    <span class="attr">pool:</span></span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">      <span class="comment"># 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line">      <span class="attr">max-active:</span> <span class="number">1000</span></span><br><span class="line">      <span class="comment"># 连接池中的最大空闲连接</span></span><br><span class="line">      <span class="attr">max-idle:</span> <span class="number">10</span></span><br><span class="line">      <span class="comment"># 连接池中的最小空闲连接</span></span><br><span class="line">      <span class="attr">min-idle:</span> <span class="number">5</span></span><br><span class="line">      <span class="comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line">      <span class="attr">max-wait:</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
 <p>测试如下：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220220095508459.png" alt="image-20220220095508459"></p>
+<p><img src="image-20220220095508459.png" alt="image-20220220095508459"></p>
 <p>这次测试终于没有问题了，之后就采用该模式连接。</p>
 </blockquote>
 <h3 id="Docker中部署RabbitMQ"><a href="#Docker中部署RabbitMQ" class="headerlink" title="Docker中部署RabbitMQ"></a>Docker中部署RabbitMQ</h3><p><strong>1. 首先在线拉取RabbitMQ镜像</strong></p>
@@ -453,7 +453,7 @@
 <p><strong>3. 访问RabbitMQ Management</strong></p>
 <p>在浏览器中访问地址：<code>your virtual machine ip:15672</code></p>
 <p>在输入启动容器时配置的帐号密码，即可正常访问：<code> -e RABBITMQ_DEFAULT_USER=heavytiger</code>和<code>-e RABBITMQ_DEFAULT_PASS=a.........m</code></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220218195919400.png" alt="image-20220218195919400"></p>
+<p><img src="image-20220218195919400.png" alt="image-20220218195919400"></p>
 <p><strong>4. 在<code>SpringBoot</code>中配置<code>RabbitMQ</code></strong></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment"># RabbitMQ配置，消息队列</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.205</span><span class="number">.200</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">heavytiger</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">37628981mm</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="comment"># 消费者最小数量</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">10</span></span><br><span class="line">        <span class="comment"># 消费者最大数量</span></span><br><span class="line">        <span class="attr">max-concurrency:</span> <span class="number">10</span></span><br><span class="line">        <span class="comment"># 限制一次处理一条消息，不要预取，默认预取250条</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">1</span></span><br><span class="line">        <span class="comment"># 启动时是否默认启动容器</span></span><br><span class="line">        <span class="attr">auto-startup:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># 被拒绝时选择重新入队</span></span><br><span class="line">        <span class="attr">default-requeue-rejected:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">template:</span></span><br><span class="line">      <span class="comment"># 如果被拒绝了，进行重试</span></span><br><span class="line">      <span class="attr">retry:</span></span><br><span class="line">        <span class="comment"># 开启重试</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment"># 重试时间</span></span><br><span class="line">        <span class="attr">initial-interval:</span> <span class="string">1000ms</span></span><br><span class="line">        <span class="comment"># 默认重试次数</span></span><br><span class="line">        <span class="attr">max-attempts:</span> <span class="number">3</span></span><br><span class="line">        <span class="comment"># 重试最大间隔时间</span></span><br><span class="line">        <span class="attr">max-interval:</span> <span class="string">10000ms</span></span><br><span class="line">        <span class="comment"># 重试的间隔乘数，例如2.0，第一次等10s，第二次20s，第三次40s</span></span><br><span class="line">        <span class="attr">multiplier:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
@@ -612,62 +612,62 @@
 </blockquote>
 <p>因此，使用ApiFox对这些流程进行简易的测试，验证接口是否正常</p>
 <p>获取秒杀信息的接口：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164150457.png" alt="image-20220227164150457"></p>
+<p><img src="image-20220227164150457.png" alt="image-20220227164150457"></p>
 <p>获取秒杀地址的接口：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164215253.png" alt="image-20220227164215253"></p>
+<p><img src="image-20220227164215253.png" alt="image-20220227164215253"></p>
 <p>执行秒杀操作的接口：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164240828.png" alt="image-20220227164240828"></p>
+<p><img src="image-20220227164240828.png" alt="image-20220227164240828"></p>
 <p>创建完成后，创建自动化测试：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164342405.png" alt="image-20220227164342405"></p>
+<p><img src="image-20220227164342405.png" alt="image-20220227164342405"></p>
 <p>将其中下一操作所需的信息设置为环境变量，方便获取值进行接下来的测试，如下所示：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164453186.png" alt="image-20220227164453186"></p>
+<p><img src="image-20220227164453186.png" alt="image-20220227164453186"></p>
 <p>之后将其集成为秒杀套件，进行联合测试：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164624889.png" alt="image-20220227164624889"></p>
+<p><img src="image-20220227164624889.png" alt="image-20220227164624889"></p>
 <p>举例说明，接口测试后，可以看到执行的结果：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164742233.png" alt="image-20220227164742233"></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164829449.png" alt="image-20220227164829449"></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164841464.png" alt="image-20220227164841464"></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227164918514.png" alt="image-20220227164918514"></p>
+<p><img src="image-20220227164742233.png" alt="image-20220227164742233"></p>
+<p><img src="image-20220227164829449.png" alt="image-20220227164829449"></p>
+<p><img src="image-20220227164841464.png" alt="image-20220227164841464"></p>
+<p><img src="image-20220227164918514.png" alt="image-20220227164918514"></p>
 <h3 id="JMeter进行压力测试"><a href="#JMeter进行压力测试" class="headerlink" title="JMeter进行压力测试"></a>JMeter进行压力测试</h3><p>由于本项目使用<code>JWT</code>鉴权，因此直接使用测试类注册<code>10000</code>个帐号，供测试使用，将这些帐号密码调用接口生成<code>Token</code>存储到<code>user_tokens.txt</code>文件中，之后进行测试时，使用该文件验证身份</p>
 <p><strong>测试代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加10000个秒杀用户，用于测试秒杀效果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addSeckillCustomer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">        Customer temp = <span class="keyword">new</span> Customer(<span class="keyword">null</span>, <span class="string">&quot;seckill&quot;</span> + i, <span class="string">&quot;123456&quot;</span>, <span class="keyword">null</span>, <span class="keyword">null</span>,</span><br><span class="line">                <span class="keyword">null</span>, <span class="string">&quot;秒杀模块测试用户&quot;</span> + i);</span><br><span class="line">        customerService.addCustomer(temp);</span><br><span class="line">        System.out.println(<span class="string">&quot;插入的customer主键id为：&quot;</span> + temp.getUserId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 登录秒杀测试用户并获得用户的token</span></span><br><span class="line"><span class="comment"> * 将测试的10000个用户的token值放入txt文件中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createTokens</span><span class="params">()</span></span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">&quot;C:\\Users\\DCM\\Desktop\\user_tokens.txt&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(file.exists()) &#123;</span><br><span class="line">        <span class="comment">// 如果文件存在则直接删除</span></span><br><span class="line">        file.delete();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span>(FileWriter fileWriter = <span class="keyword">new</span> FileWriter(file)) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            Customer customer = customerService.customerLogin(<span class="string">&quot;seckill&quot;</span> + i, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line">            String token = JwtUtil.sign(customer.getUserId(), customer.getUsername());</span><br><span class="line">            fileWriter.write(token + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            fileWriter.flush();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>创建的包含<code>Token</code>信息的文件：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227165453713.png" alt="image-20220227165453713"></p>
+<p><img src="image-20220227165453713.png" alt="image-20220227165453713"></p>
 <p><strong>秒杀测试套件的创建：</strong></p>
 <p>由于直接生成了<code>token</code>，可以直接使用，就不需要再调用登录接口了</p>
 <p>设置用户登录信息的<code>csv</code>数据文件，选择文件所在的位置，以及提取为什么变量名，此时我将变量名设置为<code>token</code>，之后可以使用<code>$&#123;token&#125;</code>进行变量的调用</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223105990.png" alt="image-20220227223105990"></p>
+<p><img src="image-20220227223105990.png" alt="image-20220227223105990"></p>
 <p>秒杀的商品设置为全局变量存储，方便进行修改</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223405920.png" alt="image-20220227223405920"></p>
+<p><img src="image-20220227223405920.png" alt="image-20220227223405920"></p>
 <p>创建信息头管理器，在<code>Authorization</code>中使用<code>$&#123;token&#125;</code>获取<code>token</code>值并附在<code>header</code>中一并发送，用于鉴权</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220227223321782.png" alt="image-20220227223321782"></p>
+<p><img src="image-20220227223321782.png" alt="image-20220227223321782"></p>
 <p>之后使用<code>JSON提取器</code>获取返回值<code>json</code>中的<code>MD5秒杀地址</code>，获取地址后，将其添加到秒杀商品操作的请求体中，即可完成请求</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090027111.png" alt="image-20220302090027111"></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090051415.png" alt="image-20220302090051415"></p>
+<p><img src="image-20220302090027111.png" alt="image-20220302090027111"></p>
+<p><img src="image-20220302090051415.png" alt="image-20220302090051415"></p>
 <h4 id="压力测试一："><a href="#压力测试一：" class="headerlink" title="压力测试一："></a>压力测试一：</h4><p>对秒杀编号3的50个商品进行测试，测试使用<code>2000</code>个线程，在<code>1s</code>内发起请求，<code>一共循环5次</code>，测试出系统的QPS</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302090551454.png" alt="image-20220302090551454"></p>
+<p><img src="image-20220302090551454.png" alt="image-20220302090551454"></p>
 <p><strong>测试结果如下：</strong></p>
 <p><strong>可以看到此时秒杀操作的<code>QPS</code>为<code>1514</code>，比较合理</strong></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093227630.png" alt="image-20220302093227630"></p>
+<p><img src="image-20220302093227630.png" alt="image-20220302093227630"></p>
 <p><strong>检查数据库的结果：</strong></p>
 <p>此时Redis中的数据正常，50个商品全部被秒杀完成</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093437091.png" alt="image-20220302093437091"></p>
+<p><img src="image-20220302093437091.png" alt="image-20220302093437091"></p>
 <p>数据库中的库存原来是500，在秒杀操作完成后，减库存至450</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093727229.png" alt="image-20220302093727229"></p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093816365.png" alt="image-20220302093816365"></p>
+<p><img src="image-20220302093727229.png" alt="image-20220302093727229"></p>
+<p><img src="image-20220302093816365.png" alt="image-20220302093816365"></p>
 <p>查看购物车表、订单表、秒杀订单表中的详情：</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302093927977.png" alt="image-20220302093927977"></p>
+<p><img src="image-20220302093927977.png" alt="image-20220302093927977"></p>
 <p>可以看到，有50行被选中，证明有50个顾客秒杀了商品</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094053172.png" alt="image-20220302094053172"></p>
+<p><img src="image-20220302094053172.png" alt="image-20220302094053172"></p>
 <p>有50行被选中，说明共生成了50条订单，正确</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302094241264.png" alt="image-20220302094241264"></p>
+<p><img src="image-20220302094241264.png" alt="image-20220302094241264"></p>
 <p>此时秒杀商品表中有50条记录，且order_id，customer_id，均与订单表购物车表中的信息一致，正确</p>
 <p>且此时的order_id生成是连续的，说明没有产生回滚(由于之前提到的产生死锁的操作，会导致出现很多回滚，虽然id是自增的，id每次却跨越5-6增加，说明基本5-6次回滚才成功插入一行数据，效率极低，QPS也特别低)</p>
 <h4 id="压力测试二"><a href="#压力测试二" class="headerlink" title="压力测试二"></a>压力测试二</h4><p>秒杀商品5，一共100件，测试使用3000线程在1s发起请求，共请求4次，实际测得的秒杀接口的QPS在1484左右</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302110659354.png" alt="image-20220302110659354"></p>
+<p><img src="image-20220302110659354.png" alt="image-20220302110659354"></p>
 <h4 id="压力测试三"><a href="#压力测试三" class="headerlink" title="压力测试三"></a>压力测试三</h4><p>秒杀商品6，一共10件，测试使用4000线程在1s发起请求，共请求3次，实际测得的秒杀接口的QPS在1364左右</p>
-<p><img src="mall-SpringBoot%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/image-20220302112214600.png" alt="image-20220302112214600"></p>
+<p><img src="image-20220302112214600.png" alt="image-20220302112214600"></p>
 <p>测试二和测试三就不演示数据库中的内容了，可以和旁边的异常率对照，加了过滤器，只把秒杀成功的视作正常</p>
 <h2 id="记录出现的问题"><a href="#记录出现的问题" class="headerlink" title="记录出现的问题"></a>记录出现的问题</h2><h3 id="使用SELECT-FOR-UPDATE时出现死锁"><a href="#使用SELECT-FOR-UPDATE时出现死锁" class="headerlink" title="使用SELECT FOR UPDATE时出现死锁"></a>使用<code>SELECT FOR UPDATE</code>时出现死锁</h3><p>为了解决mysql中，商品表的库存在并发减的情况下会出现覆盖提交的问题，如果使用乐观锁会增加重试的成本，并且需要手写重试的代码，因此考虑使用悲观锁解决问题，使用<code>SELECT FOR UPDATE</code>实现悲观锁，但是在并发的情况下出现了大量的死锁情况，甚至每一个事务都要回滚五六次才能成功的修改数据，因此我尝试解决该问题</p>
 <p>使用sql语句，打开死锁日志，可以记录最后一次发生的死锁：</p>
@@ -767,7 +767,10 @@
     <a href="/articles/%E5%96%B5%E5%96%B5%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE-%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="prev" title="喵喵商城项目_前端基础学习">
       <i class="fa fa-chevron-left"></i> 喵喵商城项目_前端基础学习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/articles/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="next" title="Java并发编程基础学习">
+      Java并发编程基础学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -842,20 +845,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -917,7 +920,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">676k</span>
+    <span title="站点总字数">677k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
